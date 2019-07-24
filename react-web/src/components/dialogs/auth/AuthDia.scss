@@ -1,10 +1,23 @@
 @import '../../../styles/colors.scss';
 @import '../../../styles/shared.scss';
-
+.error {
+    color: red!important
+}
+.no-error {
+    visibility: hidden;
+}
+.link {
+    color: $colorAccent;
+    transition: border-bottom ease-in-out 0.5s;
+}
+.link:hover {
+    color: $colorInversePrimary!important;
+    border-bottom: 1px solid $colorAccent;
+}
 .modal {
     margin-top: 10vh;
     .modal-content {
-        background-color: $colorPrimary;
+        background-color: $colorPrimary!important;
     }
     .nav {
         border: 0px;
@@ -12,6 +25,10 @@
         background-color: $colorAccent!important;
         margin: -1.5rem 1rem 0 1rem;
         padding: 10px;
+        .nav-link {
+            border-radius: 0px;
+            margin: 0px 5px;
+        }
         .nav-item {
             a {
                 color: $colorInverseAccent;
@@ -23,5 +40,28 @@
     }
     .form-ico {
         color: $colorAccent;
+        
     }
+    .md-form {
+        .active {
+            color: $colorAccent!important;
+            border-bottom: none;
+        }
+        .form-control-sm {
+            border-bottom: none;
+        }
+        input[type=text]:focus:not([readonly]),input[type=password]:focus:not([readonly])  { 
+            -webkit-box-shadow: 0 1px 0 0 $colorAccent;
+            box-shadow: 0 1px 0 0 $colorAccent;
+            border-bottom: none;
+            color: $colorInversePrimary;
+        }
+        input:active { 
+            border-bottom: none;
+        }
+        input { 
+            border-bottom: none;
+        }
+    }
+    
 }

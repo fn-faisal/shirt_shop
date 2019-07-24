@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+
+// redux.
+import { Provider, connect } from 'react-redux';
+import store from './redux/store';
+
+const mapStateToProps = state => state;
 
 //-------------------------------------------
 // Styles
@@ -33,20 +39,23 @@ import AuthDia from './components/dialogs/auth/AuthDia';
 // Render.
 //-------------------------------------------
 
-ReactDOM.render(
-    <Router>
-        <HeaderAuth />
-        <Header />
-        <AuthDia />
-        {/* <Link to={'checkout'}>Checkout</Link> */}
-        <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/checkout" component={Checkout} />
-        </Switch>
-        <Footer />
-    </Router> , document.getElementById('root'));
+class Index extends Component {
+    render = () => (
+        <Provider store={store}>
+            <Router>
+                <HeaderAuth />
+                <Header />
+                <AuthDia />
+                {/* <Link to={'checkout'}>Checkout</Link> */}
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/checkout" component={Checkout} />
+                </Switch>
+                <Footer />
+            </Router> 
+        </Provider>
+    );
+}
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-// serviceWorker.unregister();
+const view = connect(mapStateToProps)(Index);
+ReactDOM.render( <Index/>, document.getElementById('root'));
