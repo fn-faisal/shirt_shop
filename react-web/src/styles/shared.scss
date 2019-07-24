@@ -1,0 +1,11 @@
+@import './colors.scss';
+@import './fonts.scss';
+
+.bg-accent {
+    background-color: $colorAccent;
+    color: $colorInverseAccent;
+}
+
+.bg-outline-accent {
+    border: 1px solid $colorAccent;
+}

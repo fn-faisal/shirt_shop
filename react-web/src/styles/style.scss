@@ -1,0 +1,27 @@
+@import './colors.scss';
+@import './colors.scss';
+
+body {
+  background-color: $colorPrimary;
+}
+
+a {
+  color: $colorInversePrimary;
+}
+
+a.active {
+  color: $colorAccent;
+}
+
+.h {
+  font-family: 'Lato', sans-serif;
+}
+
+.accent {
+  color: $colorAccent;
+}
+
+.bg-secondary {
+  background-color: $colorSecondary!important;
+}
+

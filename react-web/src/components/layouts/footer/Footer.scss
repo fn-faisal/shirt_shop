@@ -1,0 +1,24 @@
+@import '../../../styles/fonts.scss';
+@import '../../../styles/colors.scss';
+
+.main {
+    background-color: $colorInversePrimary!important;
+    color: $colorPrimary!important;
+    padding: 20px;
+    display: flex;
+    h2, p, a { 
+        color: $colorPrimary;
+    }
+    h2 {
+        font-family: 'Lato', sans-serif;
+    }
+    .social {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+    .footer-copyr {
+        text-align: center;
+        margin-top: 20px;
+    }
+}
