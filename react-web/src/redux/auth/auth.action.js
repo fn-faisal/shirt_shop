@@ -1,11 +1,12 @@
 import { createAction } from '../utils';
 
 // services.
-import { register, loadSession, login, endSession } from './auth.service';
+import { register, loadSession, login, loginFacebook, endSession } from './auth.service';
 
 export const ACTIONS = {
     REGISTER: 'REGISTER',
     LOGIN: 'LOGIN',
+    LOGIN_FACEBOOK: 'LOGIN_FACEBOOK',
     LOAD: 'LOAD',
     LOGOUT: 'LOGOUT'  
 } 
@@ -24,6 +25,10 @@ export const initializers = {
     login : (credentials) => async (dispatch) => {
         let payload = await login(credentials);
         return dispatch(createAction( ACTIONS.LOGIN, payload ));
+    },
+    loginFacebook : ( token ) => async (dispatch) => {
+        let payload = await loginFacebook(token);
+        return dispatch(createAction( ACTIONS.LOGIN_FACEBOOK, payload ));
     },
     logout: () => {
         let payload = endSession();

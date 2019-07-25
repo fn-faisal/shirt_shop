@@ -1,6 +1,13 @@
 import React from 'react';
 import './AuthDia.scss';
 
+import FacebookAuth from 'react-facebook-auth';
+
+const FacebookLogin = ({ onClick }) => (
+    <button onClick={onClick} type="button" className="btn bg-white btn-sm waves-effect facebook-btn"> <small>Use</small><i className="fab fa-facebook-f ml-2"></i>  Facebook</button>
+);
+  
+
 export default props => (
     <div>
         <div className="modal fade show" id="auth-dia">
@@ -15,6 +22,15 @@ export default props => (
                             <li className="nav-item waves-effect waves-light">
                                 <a className="nav-link" data-toggle="tab" href="#login" role="tab" aria-selected="false">
                                 <i className="fas fa-user-plus mr-1"></i> Register</a>
+                            </li>
+                            <li className="m-2">
+                                <h4 className="text-white">OR</h4>
+                            </li>
+                            <li className="flex-1">
+                                <FacebookAuth
+                                    appId={process.env.FACEBOOK_APP_ID}
+                                    callback={ resp => props.onFacebookLogin(resp) }
+                                    component={FacebookLogin} />
                             </li>
                         </ul>
 

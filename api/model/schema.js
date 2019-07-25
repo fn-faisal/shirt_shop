@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const { Model, STRING, INTEGER, TEXT, literal } = Sequelize;
+const { Model, STRING, INTEGER, TEXT, literal, ENUM } = Sequelize;
 
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
   host: process.env.DB_HOST,
@@ -47,6 +47,7 @@ module.exports.CustomerSession = CustomerSession.init({
     session_id: { type: INTEGER, autoIncrement: true, primaryKey: true },
     customer_id: { type: INTEGER, allowNull: false },
     session_token: { type: TEXT, allowNull: false },
+    type: { type: ENUM('email', 'facebook'), defaultValue: 'email' },
     expires_in: { type: STRING },
     created_at: { type: 'TIMESTAMP', defaultValue: literal('CURRENT_TIMESTAMP'), allowNull: false }
 }, { sequelize, freezeTableName: true, modelName: model.CustomerSession, timestamps: false });

@@ -37,6 +37,11 @@ export default class AuthDia extends Component {
         getError: (field) => {
             let error = Object.values(this.state.errors).filter( e => e.field === field );
             return error.length > 0 ? error.pop().message : '';
+        },
+        onFacebookLogin : (response) => {
+            // let { accessToken } = response;
+            console.log(response);
+            dispatch.loginFacebook( response.accessToken );
         }
     }
 
@@ -71,6 +76,8 @@ export default class AuthDia extends Component {
         return true;
     }
 
+    // facebook callback.
+    
     //-------------------------------------------
     // Component methods.
     //-------------------------------------------

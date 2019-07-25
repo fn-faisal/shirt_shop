@@ -65,3 +65,13 @@
     }
     
 }
+
+.facebook-btn {
+    background-color: #3b5998!important;
+    color: $colorInverseAccent;
+}
+
+.facebook-btn:hover {
+    background-color: $colorInverseAccent!important;
+    color: #3b5998!important;
+}

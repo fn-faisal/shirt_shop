@@ -36,3 +36,7 @@ module.exports.login_customer_validation = [
     check('email').not().isEmpty().withMessage(empty('email')).isEmail().withMessage(invalid('email')).trim().escape().custom( async (val) => customerExistsCheck(val) ),
     check('password').not().isEmpty().withMessage(empty('password')).trim().escape().isLength({ max: 50 }).withMessage(lengthGt('password', 50))
 ];
+
+module.exports.continue_facebook = [
+    check('access_token').not().isEmpty().withMessage(empty('access_token')).trim().escape()
+];
