@@ -1,0 +1,63 @@
+.card {
+    max-width: 100%;
+}
+
+.filter-color {
+    width: 20px;
+}
+
+.action {
+    width: 75px;
+}
+
+.brand-list {
+    overflow-x: scroll;
+    max-height: 150px;
+}
+
+.filter-cancel-small {
+    font-size: 12px;
+}
+
+.filter-item {
+    font-size: 14px;
+}
+
+.filter-type {
+    color: lightslategray
+}
+
+.filter-size  {
+    .active {
+        border-radius: 0;
+        background-color: red !important;
+        color: white !important;
+        box-shadow: 1px 1px 1px red;
+    }
+}
+
+.filter-size-item {
+    border-radius: 2px !important;
+    background-color: #ebebeb;
+    color: gray !important;
+    width: 65px;
+    padding: 0;
+    text-align: center;
+}
+
+.slider-handle {
+    width: 10px;
+    height: 10px;
+    background-color: red !important;
+    background-image: linear-gradient(to bottom, red 0%, red 100%);
+}
+
+.slider-track {
+    height: 2px !important;
+}
+
+.slider-selection {
+    background-image: -webkit-linear-gradient(top, red 0%, red 100%) !important;
+    background-image: linear-gradient(to bottom, red 0%, red 100%);
+    margin-right: 10px;
+}
