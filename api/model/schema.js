@@ -21,12 +21,16 @@ connect();
 const model = {
     Customer: 'customer',
     CustomerSession: 'customer_session',
-    Prodcut: 'product'
+    Prodcut: 'product',
+    Attribute: 'attribute',
+    AttributeValue: 'attribute_value'
 }
 
 class Customer extends Model {}
 class CustomerSession extends Model {}
 class Product extends Model {}
+class Attribute extends Model {}
+class AttributeValue extends Model {}
 
 module.exports.Customer = Customer.init({
     customer_id: { type: INTEGER, autoIncrement: true, primaryKey: true },
@@ -65,3 +69,14 @@ module.exports.Product = Product.init({
     thumbnail: { type: STRING },
     display: { type: SMALLINT }
 }, { sequelize, freezeTableName: true, modelName: model.Product, timestamps: false });
+
+module.exports.Attribute = Attribute.init({
+    attribute_id: { type: INTEGER, primaryKey: true, autoIncrement: true },
+    name: { type: STRING, allowNull: false }
+}, { sequelize, freezeTableName: true, modelName: model.Attribute, timestamps: false })
+
+module.exports.AttributeValue = AttributeValue.init({
+    attribute_value_id: { type: INTEGER, primaryKey: true, autoIncrement: true },
+    attribute_id: { type: INTEGER, allowNull: false },
+    value: { type: STRING, allowNull: false }
+}, { sequelize, freezeTableName: true, modelName: model.AttributeValue, timestamps: false })

@@ -4,6 +4,8 @@
 
 .filter-color {
     width: 20px;
+    margin: 6px;
+    transition: box-shadow ease-in 0.25s;
 }
 
 .action {
@@ -61,3 +63,20 @@
     background-image: linear-gradient(to bottom, red 0%, red 100%);
     margin-right: 10px;
 }
+
+.filter-color:hover {
+    box-shadow: 4px 4px 3px lightgray!important;
+    cursor: pointer;
+ }
+
+ .filter-color.filter-color-active {
+    box-shadow: 2px 2px 3px lightgray;
+ }
+
+ .filter-size-btn:hover {
+    box-shadow: 2px 2px 3px lightgray;
+ }
+
+ .slider {
+     width: 100%!important;
+ }

@@ -13,3 +13,5 @@ export const hasError = ( action ) => {
         return false;
     return true;
 }
+
+export const api = `${process.env.API_HOST}:${process.env.API_PORT}/api`;

@@ -15,47 +15,32 @@ export default props => (
             </div>
             <div className="card-body">
                 <h5 className="card-title text-muted">Color</h5>
-                <div className="d-flex justify-conten-between my-3">
-                    <span className="filter-color filter-color-active badge mr-2 rounded-circle p-1" style={{ backgroundColor: 'cyan' }}> C </span>
-                    <span className="filter-color badge mx-2 rounded-circle p-1" style={{ backgroundColor: 'green' }}>  </span>
-                    <span className="filter-color badge mx-2 rounded-circle p-1" style={{ backgroundColor: 'red' }}>  </span>
-                    <span className="filter-color badge mx-2 rounded-circle p-1" style={{ backgroundColor: 'pink' }}>  </span>
-                    <span className="filter-color badge mx-2 rounded-circle p-1" style={{ backgroundColor: 'lightgreen' }}>  </span>
-                    <span className="filter-color badge mx-2 rounded-circle p-1" style={{ backgroundColor: 'purple' }}>  </span>
+                <div className="row mx-2 d-flex justify-conten-between my-3">
+                { props.config.colors.map( (color, key) => <span key={key} className="filter-color badge rounded-circle p-1" style={{ backgroundColor: color.value }}> { color.value.slice(0, 1).toUpperCase() } </span> ) }                    
                 </div>
                 <h5 className="card-title text-muted mt-4">Size</h5>
                 <ul className="nav nav-pills filter-size">
-                    <li className="nav-item">
-                        <a className="filter-size-btn nav-link text-white m-2 filter-size-item" href="#">XS</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="filter-size-btn nav-link active m-2 filter-size-item" href="#">S</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="filter-size-btn nav-link text-white m-2 filter-size-item" href="#">M</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="filter-size-btn nav-link text-white m-2 filter-size-item" href="#">L</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="filter-size-btn nav-link text-white m-2 filter-size-item" href="#">XL</a>
-                    </li>
+                    { props.config.sizes.map( (size, key) => (
+                        <li className="nav-item" key={key}>
+                            <a className="filter-size-btn nav-link text-white m-2 filter-size-item" href="#">{ size.value }</a>
+                        </li>
+                    )) }
                 </ul>
                 <h5 className="card-title text-muted mt-4">Price Range</h5>
                 <div className="filter-range">
-                    <input id="filter-range" type="text" className="align-self-center"
-                     data-slider-min="1" data-slider-max="35" data-slider-step="5" data-slider-value="[4,28]"/>
+                    <input id="filter-range" type="text" className="align-self-center" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"
+                     data-slider-min="1" data-slider-max={ props.config.max_value } data-slider-step="1" data-slider-value={`[1, ${props.config.max_value}]`}/>
                     <div className="filter-range-price-text d-flex justify-content-between">
-                        <span className="filter-range-price-min">&#163; 4</span>
-                        <span className="filter-range-price-min">&#163; 28</span>
+                        <span className="filter-range-price-min">&#163; { props.curMinValue } </span>
+                        <span className="filter-range-price-min">&#163; { props.curMaxValue }</span>
                     </div>
                 </div>
-                <h5 className="card-title text-muted mt-4">Brand</h5>
+                <h5 className="card-title text-muted mt-4">Departments</h5>
                 <div className="brand-list list-group pl-0">
                     <button type="button" className="list-group-item list-group-item-action border-0">
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" id="defaultCheck1"/>
-                            <label className="form-check-label" for="defaultCheck1">
+                            <label className="form-check-label">
                                 Abercrombie &
                             </label>
                         </div>
@@ -63,7 +48,7 @@ export default props => (
                     <button type="button" className="list-group-item list-group-item-action border-0">
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" id="defaultCheck1"/>
-                            <label className="form-check-label" for="defaultCheck1">
+                            <label className="form-check-label" >
                                 Fitch
                             </label>
                         </div>
@@ -71,7 +56,7 @@ export default props => (
                     <button type="button" className="list-group-item list-group-item-action border-0">
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" id="defaultCheck1"/>
-                            <label className="form-check-label" for="defaultCheck1">
+                            <label className="form-check-label" >
                                 Adidas Originals
                             </label>
                         </div>
@@ -79,7 +64,7 @@ export default props => (
                     <button type="button" className="list-group-item list-group-item-action border-0">
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" id="defaultCheck1"/>
-                            <label className="form-check-label" for="defaultCheck1">
+                            <label className="form-check-label" >
                                 ASOS
                             </label>
                         </div>
@@ -87,7 +72,7 @@ export default props => (
                     <button type="button" className="list-group-item list-group-item-action border-0">
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" id="defaultCheck1"/>
-                            <label className="form-check-label" for="defaultCheck1">
+                            <label className="form-check-label">
                                 Cheap Monday
                             </label>
                         </div>

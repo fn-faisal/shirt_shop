@@ -2,7 +2,9 @@ import axios from 'axios';
 
 import cookie from 'react-cookies';
 
-const api = `${process.env.API_HOST}:${process.env.API_PORT}/api`;
+import { api } from '../utils';
+
+//const api = `${process.env.API_HOST}:${process.env.API_PORT}/api`;
 const ep_customer = `customer`;
 const ep_customers = `customers`;
 const ep_login = `${ep_customers}/login`;

@@ -11,7 +11,6 @@ module.exports.registerCustomer = async (req, res) => {
     }
     catch ( e ) {
         console.error(e);
-        //switch( errors.p )
         res.json({ code: 'SRV_01', message: 'Server error' });
     }
 }

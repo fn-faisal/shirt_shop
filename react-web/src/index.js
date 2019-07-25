@@ -5,7 +5,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 // redux.
 import { Provider, connect } from 'react-redux';
 import store from './redux/store';
-import dispatch from './redux/auth/auth.dispatch';
+import authDispatch from './redux/auth/auth.dispatch';
+import configDispatch from './redux/config/config.dispatch';
 
 const mapStateToProps = state => state;
 
@@ -41,7 +42,7 @@ import AuthDia from './components/dialogs/auth/AuthDia';
 //-------------------------------------------
 
 class Index extends Component {
-    componentDidMount = () => dispatch.load();
+    componentWillMount = () => {authDispatch.load(); configDispatch.loadConfig() }
     render = () => (
         <Provider store={store}>
             <Router>

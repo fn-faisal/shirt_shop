@@ -38,7 +38,7 @@ export default props => (
             {/* Add to a component */}
             <div className="cart dropdown">
                 <a href="#" className="cart-btn mx-4 bg-transparent text-dark dropdown-toggle" id="cartMenu" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false" onclick="openCart()">
+                aria-haspopup="true" aria-expanded="false" >
                     <img src="/assets/img/icons-bag.png"/><span className="badge rounded-circle badge-danger position-absolute header-cart-count">6</span>
                 </a>
             </div>

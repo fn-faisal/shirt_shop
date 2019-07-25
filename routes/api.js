@@ -1,6 +1,13 @@
 const router = require('express')();
 
 //-------------------------------------------
+// Configs.
+//-------------------------------------------
+
+const Config = require('../api/controller/config/config.route');
+router.use( '/config', Config );
+
+//-------------------------------------------
 // Customer.
 //-------------------------------------------
 
