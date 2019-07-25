@@ -28,7 +28,7 @@ export default props => (
                 </ul>
                 <h5 className="card-title text-muted mt-4">Price Range</h5>
                 <div className="filter-range">
-                    <input id="filter-range" type="text" className="align-self-center" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"
+                    <input id="filter-range" type="text" className="align-self-center"
                      data-slider-min="1" data-slider-max={ props.config.max_value } data-slider-step="1" data-slider-value={`[1, ${props.config.max_value}]`}/>
                     <div className="filter-range-price-text d-flex justify-content-between">
                         <span className="filter-range-price-min">&#163; { props.curMinValue } </span>
