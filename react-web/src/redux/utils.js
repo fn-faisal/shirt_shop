@@ -3,7 +3,9 @@ export const createAction = ( type, payload ) => {
 }
 
 export const hasError = ( action ) => {
-    if ( !('payload' in action) )
+    if ( !('payload' in action))
+        return false;
+    if ( action.payload === undefined )
         return false;
     if ( Object.keys(action.payload).filter( pl => pl === 'errors' ).length <= 0 )
         return false;

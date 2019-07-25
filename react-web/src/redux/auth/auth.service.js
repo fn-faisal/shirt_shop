@@ -1,11 +1,63 @@
 import axios from 'axios';
 
+import cookie from 'react-cookies';
+
+const api = `${process.env.API_HOST}:${process.env.API_PORT}/api`;
+const ep_customer = `customer`;
+const ep_customers = `customers`;
+const ep_login = `${ep_customers}/login`;
+
 export const register = async ( customer ) => {
     try {
+        // delete the confirm password field.
+        delete customer['confirm-password'];
         // call the api
-        console.log(`${process.env.API_HOST}:${process.env.API_PORT}`);
+        let response = await axios.post( `${api}/${ep_customers}`, customer);
+        if ( response.status === 200 ) {
+            // close the auth dia if open.
+            $('#auth-dia').modal('hide');
+            let json = response.data;
+            let { 
+                accessToken, // the access token.
+                customer: { schema } 
+             } = json;
+            
+             // no error/ save cookie.
+            cookie.save( 'session', JSON.stringify({ token: accessToken, profile: schema }) )
+        
+            return { token: accessToken, profile: schema }
+        } else console.log(response);
     } catch ( e ) {
         console.error(e);
         return { errors: [{ error: 'An error occurred' }] };
     }
 }
+
+export const login = async ( credentials ) => {
+    try {
+        let response = await axios.post( `${api}/${ep_login}`, credentials );
+        if ( response.status === 200 ) {
+            // close the auth dia if open.
+            $('#auth-dia').modal('hide');
+            let json = response.data;
+            let { 
+                accessToken, // the access token.
+                customer: { schema } 
+             } = json;
+            
+             // no error/ save cookie.
+            cookie.save( 'session', JSON.stringify({ token: accessToken, profile: schema }) )
+        
+            return { token: accessToken, profile: schema }
+        } else console.log(response);
+    } catch( e ) {
+        console.error(e);
+        return { errors: [{ error: 'An error occurred' }] };
+    }
+}
+
+export const loadSession = () => {
+    return cookie.load('session');
+}
+
+export const endSession = () => cookie.remove('session')

@@ -1,5 +1,12 @@
 import { Component } from 'react';
 import vHeader from './Header.jsx';
-export default class Header extends Component {
+
+// connect redux
+import { connect } from 'react-redux';
+
+class Header extends Component {
     render = () => vHeader(this.state)
 }
+
+const mapStateToProps = state => state;
+export default connect(mapStateToProps)(Header);

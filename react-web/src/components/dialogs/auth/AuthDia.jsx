@@ -23,23 +23,29 @@ export default props => (
                                 <div className="modal-body mb-1">
                                     <div className="md-form form-sm">
                                         <i className="form-ico fas fa-envelope prefix"></i>
-                                        <input type="text" id="form2" className="form-control form-control-sm"/>
+                                        <input type="text" className={`form-control form-control-sm`} onChange={e => props.updateCustomer('email', e.target.value)}/>
                                         <label>Your email</label>
+                                        <small className={`form-text text-muted ${props.hasError('email') === true ? 'error' : 'no-error'}`}>
+                                            { props.getError('email') }
+                                        </small>
                                     </div>
                                     <div className="md-form form-sm">
                                         <i className="form-ico fas fa-lock prefix"></i>
-                                        <input type="password" id="form3" className="form-control form-control-sm"/>
+                                        <input type="password" className={`form-control form-control-sm`} onChange={e => props.updateCustomer('password', e.target.value)}/>
                                         <label>Your password</label>
+                                        <small className={`form-text text-muted ${props.hasError('password') === true ? 'error' : 'no-error'}`}>
+                                            { props.getError('password') }
+                                        </small>
                                     </div>
                                     <div className="text-center mt-4">
-                                        <button className="btn bg-accent waves-effect waves-light">Log in
+                                        <button className="btn bg-accent waves-effect waves-light" onClick={ () => props.login() }>Log in
                                             <i className="form-ico fas fa-sign-in ml-1"></i>
                                         </button>
                                     </div>
                                 </div>
                                 <div className="modal-footer">
                                     <div className="options text-center text-md-right mt-1">
-                                        <p>Forgot <a href="#" className="blue-text"> Password?</a></p>
+                                        <p>Forgot <a href="#" className="link"> Password?</a></p>
                                     </div>
                                     <button type="button" className="btn btn-outline-accent waves-effect ml-auto" data-dismiss="modal">Close</button>
                                 </div>
@@ -92,7 +98,7 @@ export default props => (
                                             <a href="#" className="link"> Log In</a>
                                         </p>
                                     </div>
-                                    <button type="button" className="btn  waves-effect ml-auto" data-dismiss="modal">Close</button>
+                                    <button type="button" className="btn waves-effect ml-auto" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>

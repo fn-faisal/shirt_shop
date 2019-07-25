@@ -23,8 +23,12 @@ export default class AuthDia extends Component {
             return state;
         }),
         register: () => {
-            if (this.validate() === false ) return;
+            if (this.validate(['name', 'email', 'password', 'confirm-password']) === false ) return;
             dispatch.register( this.state.customer )
+        },
+        login : () => {
+            if (this.validate(['email', 'password']) === false ) return;
+            dispatch.login( { email: this.state.customer.email, password: this.state.customer.password} );
         },
         hasError: (field) => {
             let error = Object.values(this.state.errors).filter( e => e.field === field );
@@ -40,22 +44,23 @@ export default class AuthDia extends Component {
     // Custom methods.
     //-------------------------------------------
 
-    validate () {
+    validate (toValidate) {
         this.setState({errors: {}})
         let errors = [];
         // validate inputs.
         // empty fields
-        let emptyFields = Object.keys(this.state.customer).filter( field => this.state.customer[field] == '' );
+        let emptyFields = Object.keys(this.state.customer).filter( field => toValidate.includes(field) && this.state.customer[field] == '' );
         if ( emptyFields.length > 0 ) {
             errors = emptyFields.map ( f => { return { field: f, message: `The field ${f} is required` } } );
         }
         // password-conformation.
-        if ( this.state.customer.password !== this.state.customer['confirm-password'] ) {
+
+        if ( toValidate.includes('confirm-password') && this.state.customer.password !== this.state.customer['confirm-password'] ) {
             errors.push({ field: 'confirm-password', message: 'The field doen\'t match password field' })
             errors.push({ field: 'password', message: 'The field doen\'t match confirm-password field' })
         }
         // email format validation.
-        if ( !this.state.customer.email.includes('@') || !this.state.customer.email.includes('.com') ){
+        if ( toValidate.includes('email') && !this.state.customer.email.includes('@') || !this.state.customer.email.includes('.com') ){
             errors.push({ field: 'email', message: 'Email is of invalid format' })
         }
         // if errors.

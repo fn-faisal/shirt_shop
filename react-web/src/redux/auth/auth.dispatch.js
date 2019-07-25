@@ -5,5 +5,8 @@ import { initializers } from './auth.action';
 import store from '../store';
 
 export default {
-    register: ( customer ) => store.dispatch( initializers.register(customer) )
+    register: ( customer ) => store.dispatch( initializers.register(customer) ),
+    load: () => store.dispatch( initializers.load() ),
+    login: ( credentials ) => store.dispatch( initializers.login(credentials) ),
+    logout: () => store.dispatch( initializers.logout() )
 }
