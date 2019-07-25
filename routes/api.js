@@ -9,7 +9,11 @@ const Customers = require('../api/controller/customers/customers.route');
 router.use( '/customer', Customer );
 router.use( '/customers', Customers );
 
+//-------------------------------------------
+// Product
+//-------------------------------------------
 
-//router.get('/', (req, res) => res.send('Hello web'));
+const Product = require('../api/controller/product/product.route');
+router.use( '/products', Product );
 
 module.exports = router;

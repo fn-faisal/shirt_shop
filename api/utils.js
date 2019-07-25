@@ -21,3 +21,7 @@ module.exports.userErrorCodes = {
     unique: ( field ) => { return { code: 'USR_04', message: `The ${field} already exists` } },
     notfound: ( field ) => { return { code: 'USR_05', message: `The ${field} doesn't exist.` } }
 }
+
+module.exports.queryErrorCodes = {
+    type: ( field, type ) => { return { code: 'QRY_01', message: `The query parameter ${field} must be of type ${type}` } },
+}
