@@ -1,5 +1,5 @@
 // attributes.
-const { Attribute, AttributeValue, Product } = require('../../model/schema');
+const { Attribute, AttributeValue, Product, Department, Category } = require('../../model/schema');
 
 const sequelize = require('sequelize');
 
@@ -11,7 +11,7 @@ module.exports.getConfig = async ( req, res ) => {
         // the list of color.
         let colors = await AttributeValue.findAll({ where: { attribute_id: color_attribute_id }, attributes: [ 'attribute_value_id', 'value' ] })
         
-        // fetch sizes.
+        // fetch sizes. 
         // attribute id for color.
         let { attribute_id: sizes_attribute_id } = await Attribute.findOne({ where: { name: 'Size' }, attributes: [ 'attribute_id' ] });
         // the list of color.
@@ -19,10 +19,19 @@ module.exports.getConfig = async ( req, res ) => {
         
         // the maximum price.
         let { price: max_value } = await Product.findOne({ attributes: [ [sequelize.fn('MAX', sequelize.col('price') ), 'price'] ] });
+
+        // the departments.
+        let departments = await Department.findAll(); 
+
+        // categories.
+        let categories = await Category.findAll();
+
         return res.json({
             max_value: parseFloat(max_value),
             colors,
-            sizes 
+            sizes,
+            departments,
+            categories
         })
 
     } catch( e ) {

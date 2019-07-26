@@ -1,0 +1,12 @@
+@import '../../../styles/colors.scss';
+.page-nav-list {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.active {
+    a {
+        background-color: $colorAccent!important;
+    }
+}

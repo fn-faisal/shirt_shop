@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import view from './Items.jsx';
 
 class Item extends Component {
+    componentDidMount = () => console.log(this.props.product);
     render = () => view({ ...this.state, ...this.props })
 }
 

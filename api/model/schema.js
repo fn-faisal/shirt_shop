@@ -22,15 +22,21 @@ const model = {
     Customer: 'customer',
     CustomerSession: 'customer_session',
     Prodcut: 'product',
+    ProductAttribute: 'product_attribute',
     Attribute: 'attribute',
-    AttributeValue: 'attribute_value'
+    AttributeValue: 'attribute_value',
+    Department: 'department',
+    Category: 'category'
 }
 
 class Customer extends Model {}
 class CustomerSession extends Model {}
 class Product extends Model {}
+class ProductAttribute extends Model {}
 class Attribute extends Model {}
 class AttributeValue extends Model {}
+class Department extends Model {}
+class Category extends Model {}
 
 module.exports.Customer = Customer.init({
     customer_id: { type: INTEGER, autoIncrement: true, primaryKey: true },
@@ -80,3 +86,23 @@ module.exports.AttributeValue = AttributeValue.init({
     attribute_id: { type: INTEGER, allowNull: false },
     value: { type: STRING, allowNull: false }
 }, { sequelize, freezeTableName: true, modelName: model.AttributeValue, timestamps: false })
+
+
+
+module.exports.Department = Department.init({
+    department_id: { type: INTEGER, primaryKey: true, autoIncrement: true },
+    name: { type: STRING, allowNull: false },
+    description: { type: STRING } 
+}, { sequelize, freezeTableName: true, modelName: model.Department, timestamps: false }); 
+
+module.exports.Category = Category.init({
+    category_id: { type: INTEGER, primaryKey: true, autoIncrement: true },
+    department_id: { type: INTEGER, allowNull: false },
+    name: { type: STRING, allowNull: false },
+    description: { type: STRING }
+}, { sequelize, freezeTableName: true, modelName: model.Category, timestamps: false })
+
+module.exports.ProductAttribute = ProductAttribute.init({
+    product_id : { type: INTEGER, allowNull: false },
+    attribute_value_id: { type: INTEGER, allowNull: false },
+}, { sequelize, freezeTableName: true, modelName: model.ProductAttribute, timestamps: false })

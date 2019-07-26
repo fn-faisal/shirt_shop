@@ -1,6 +1,6 @@
 const sequelize = require('sequelize');
 // products model.
-const { Product } = require('../../model/schema'); 
+const { Product, Attribute, AttributeValue, ProductAttribute } = require('../../model/schema'); 
 
 // get all products.
 module.exports.getAllProducts = async (req, res) => {
@@ -13,9 +13,8 @@ module.exports.getAllProducts = async (req, res) => {
     // response with product.
     try {
         // products.
-        let products = await Product.findAll({ attributes: [ 'product_id', 'name', 'price', 'discounted_price', 'thumbnail', [sequelize.fn('SUBSTRING', sequelize.col('description'), 1, descriptionLength), 'description'] ], offset: (page * limit), limit: limit });
+        let products = await Product.findAll({ attributes: [ 'product_id', 'name', 'price', 'discounted_price', 'thumbnail', [sequelize.fn('SUBSTRING', sequelize.col('description'), 1, descriptionLength), 'description'], 'image' ], offset: (page * limit), limit: limit });
         return res.json({ count: products.length, rows: products });
-
     } catch ( e ) {
         console.error(e);
         return res.status(500).json({ code: 'SRV_01', message: 'Server error' });

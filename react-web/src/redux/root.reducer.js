@@ -10,10 +10,13 @@ import config from './config/config.reducer';
 import auth from './auth/auth.reducer';
 // errors.
 import error from './error/error.reducer';
-
+// filter.
+import filter from './filter/filter.reducer';
+// products.
+import product from './product/product.reducer';
 
 //-------------------------------------------
 // Combine reducers.
 //-------------------------------------------
 
-export default combineReducers({ auth, error, config });
+export default combineReducers({ auth, error, config, filter, product });

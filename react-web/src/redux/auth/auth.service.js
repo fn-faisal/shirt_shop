@@ -1,7 +1,5 @@
 import axios from 'axios';
-
 import cookie from 'react-cookies';
-
 import { api } from '../utils';
 
 //const api = `${process.env.API_HOST}:${process.env.API_PORT}/api`;

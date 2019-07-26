@@ -42,7 +42,12 @@ import AuthDia from './components/dialogs/auth/AuthDia';
 //-------------------------------------------
 
 class Index extends Component {
-    componentWillMount = () => {authDispatch.load(); configDispatch.loadConfig() }
+
+    componentWillMount = () => {
+        authDispatch.load(); 
+        configDispatch.loadConfig();
+    }
+
     render = () => (
         <Provider store={store}>
             <Router>
