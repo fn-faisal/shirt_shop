@@ -6,5 +6,5 @@ import store from '../store';
 
 // dispatch.
 export default {
-    getProducts: () => store.dispatch(initializers.getProducts())
+    getProducts: ( page = 1, filter = {} ) => store.dispatch(initializers.getProducts( page, filter ))
 };

@@ -46,7 +46,7 @@ export default props => (
                 </div> 
             </div>
             <div className="card-footer border-0 d-flex justify-content-around">
-                <button className="action btn btn-danger badge-pill p-1">Apply</button>
+                <button className="action btn btn-danger badge-pill p-1" onClick={ () => props.applyFilter() }>Apply</button>
                 <button className="btn btn-transparent p-0 m-0 shadow-none text-danger bg-transparent" onClick={ () => props.clearFilter() }> <i className="fa fa-times text-danger"></i> Clear All</button>
             </div>
         </div>

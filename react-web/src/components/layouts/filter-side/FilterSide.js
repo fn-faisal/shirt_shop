@@ -27,7 +27,6 @@ class FilterSide extends Component {
     }
 
     componentDidUpdate = () => {
-        console.log(this.props.filter.departments);
         $('#filter-range').slider({
             formatter: (value) => {
                 if ( value instanceof Array ) {

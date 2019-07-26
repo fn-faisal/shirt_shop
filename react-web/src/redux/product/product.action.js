@@ -10,9 +10,9 @@ export const ACTIONS = {
 
 // initializers
 export const initializers = {
-    getProducts: ( ) => async ( dispatch ) => {
+    getProducts: ( page = 1, filter = {} ) => async ( dispatch ) => {
         // get the product.
-        let payload = await getProducts();
+        let payload = await getProducts( page, filter );
         return dispatch(createAction(ACTIONS.GET_PRODUCTS, payload));
     }
 };
