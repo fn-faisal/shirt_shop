@@ -14,13 +14,13 @@ export default props => (
             <div className="dropdown mx-3">
                 <h6 className="pt-1 dropdown-toggle" data-toggle="dropdown">Sizes { props.filter.size && <small>{ ` : ${props.filter.size}` }</small> }</h6>
                 <div className="dropdown-menu dropdown-primary mt-2">
-                    { props.config.sizes.map( (size, key) => <a key={key} onClick={ () => props.updateFilter({ size: size.value }) } className="dropdown-item" href="javascrip:void(0)">{size.value}</a> ) }
+                    { props.config.sizes.map( (size, key) => <a key={key} onClick={ () => props.updateFilter({ size: size.value, size_id: size.attribute_value_id }) } className="dropdown-item" href="javascrip:void(0)">{size.value}</a> ) }
                 </div>
             </div>
             <div className="dropdown mx-3">
                 <h6 className="pt-1 dropdown-toggle" data-toggle="dropdown">Color { props.filter.color && <small>{ ` : ${props.filter.color}` }</small> }</h6>
                 <div className="dropdown-menu dropdown-primary mt-2" style={{ backgroundColor: 'lightgrey' }}>
-                    { props.config.colors.map( (color, k ) => <a key={k} onClick={ () => props.updateFilter({ color: color.value }) } className="dropdown-item" href="javascrip:void(0)" style={{ color: color.value }}><i className="fas fa-paint-brush" ></i> {color.value}</a> ) }
+                    { props.config.colors.map( (color, k ) => <a key={k} onClick={ () => props.updateFilter({ color: color.value, color_id: color.attribute_value_id }) } className="dropdown-item" href="javascrip:void(0)" style={{ color: color.value }}><i className="fas fa-paint-brush" ></i> {color.value}</a> ) }
                 </div>
             </div>
 

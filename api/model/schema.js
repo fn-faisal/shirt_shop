@@ -23,6 +23,7 @@ const model = {
     CustomerSession: 'customer_session',
     Prodcut: 'product',
     ProductAttribute: 'product_attribute',
+    ProductCategory: 'product_category',
     Attribute: 'attribute',
     AttributeValue: 'attribute_value',
     Department: 'department',
@@ -33,6 +34,7 @@ class Customer extends Model {}
 class CustomerSession extends Model {}
 class Product extends Model {}
 class ProductAttribute extends Model {}
+class ProductCategory extends Model {}
 class Attribute extends Model {}
 class AttributeValue extends Model {}
 class Department extends Model {}
@@ -106,3 +108,8 @@ module.exports.ProductAttribute = ProductAttribute.init({
     product_id : { type: INTEGER, allowNull: false },
     attribute_value_id: { type: INTEGER, allowNull: false },
 }, { sequelize, freezeTableName: true, modelName: model.ProductAttribute, timestamps: false })
+
+module.exports.ProductCategory = ProductCategory.init({
+    product_id : { type: INTEGER, allowNull: false },
+    category_id: { type: INTEGER, allowNull: false },
+}, { sequelize, freezeTableName: true, modelName: model.ProductCategory, timestamps: false });
