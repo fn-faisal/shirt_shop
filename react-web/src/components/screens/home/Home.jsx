@@ -33,7 +33,7 @@ export default props => (
                 { props.product.data.filter( (p, i) => i >= 6 )
                     .map( (product, k) => (
                         <div key={k} className="col-md-4">
-                            <Item item={product}/>
+                            <Item item={product} />
                         </div>
                     )) }
             </div>

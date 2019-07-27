@@ -5,9 +5,7 @@ const ep_products = 'products';
 
 export const getProducts = async ( page, filter = {} ) => {
     try { 
-        
         let filterQuery = Object.keys(filter).map( (fk, i) => filter[fk] !== undefined ? `${fk}=${filter[fk]};` : '' ).join('');
-        
         let response = await axios.get( `${api}/${ep_products}?limit=9&page=${page}&filter=${filterQuery}`);
         if ( response.status === 200 ) {
             let { count, rows } = response.data; 
@@ -17,4 +15,16 @@ export const getProducts = async ( page, filter = {} ) => {
         console.error(e);
         return { errors: [{ error: 'An error occurred' }] };
     } 
+}
+
+export const getProduct = async ( id ) => {
+    try { 
+        let response = await axios.get( `${api}/${ep_products}/${id}?with_meta=true`);
+        if ( response.status === 200 ) {
+            return response.data; 
+        } else console.log(response);
+    } catch (e) {
+        console.error(e);
+        return { errors: [{ error: 'An error occurred' }] };
+    }
 }

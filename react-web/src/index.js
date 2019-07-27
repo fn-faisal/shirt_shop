@@ -30,6 +30,7 @@ import Footer from './components/layouts/footer/Footer';
 
 import Home from './components/screens/home/Home';
 import Checkout from './components/screens/checkout/Checkout';
+import ItemFull from './components/screens/item_full/ItemFull';
 
 //-------------------------------------------
 // Dialogs.
@@ -58,6 +59,7 @@ class Index extends Component {
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route path="/checkout" component={Checkout} />
+                    <Route path="/item/:product_id" component={ItemFull} />
                 </Switch>
                 <Footer />
             </Router> 

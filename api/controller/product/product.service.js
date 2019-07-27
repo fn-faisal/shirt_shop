@@ -1,6 +1,6 @@
 const sequelize = require('sequelize');
 // products model.
-const { Product, Attribute, AttributeValue, ProductAttribute, ProductCategory } = require('../../model/schema'); 
+const { Product, Attribute, AttributeValue, Category, ProductAttribute, ProductCategory, Department } = require('../../model/schema'); 
 
 // get all products.
 module.exports.getAllProducts = async (req, res) => {
@@ -78,6 +78,42 @@ module.exports.getAllProducts = async (req, res) => {
         });
         return res.json({ count: products.length, rows: products });
     } catch ( e ) {
+        console.error(e);
+        return res.status(500).json({ code: 'SRV_01', message: 'Server error' });
+    }
+}
+
+module.exports.getProductById = async ( req, res ) => {
+    try {
+        let product = await Product.findOne({ where: { product_id: req.params.product_id}});
+        if ( req.query.with_meta === 'true' ) {
+            product = product.toJSON();
+            // colors.
+            let colorsAttrId = await Attribute.findOne({ where: { name: 'Color' } });
+            let colorAttributes = await AttributeValue.findAll({ where: { attribute_id: colorsAttrId.attribute_id } })
+            let colorAttrValIds = colorAttributes.map( cAt => cAt.attribute_value_id );
+            let productColorAttributes = colorAttributes.filter( attr => colorAttrValIds.includes(attr.attribute_value_id));
+            product.colors = productColorAttributes;
+
+            // sizes.
+            let sizesAttrId = await Attribute.findOne({ where: { name: 'Size' } });
+            let sizeAttributes = await AttributeValue.findAll({ where: { attribute_id: sizesAttrId.attribute_id } })
+            let sizeAttrValIds = sizeAttributes.map( cAt => cAt.attribute_value_id );
+            let productSizeAttributes = sizeAttributes.filter( attr => sizeAttrValIds.includes(attr.attribute_value_id));
+            product.sizes = productSizeAttributes;
+
+            // category.
+            let productCategory = await ProductCategory.findOne({ attributes: [ 'category_id', 'product_id' ], where: { product_id: req.params.product_id } });
+            let category = await Category.findOne({ where: { category_id: productCategory.category_id } });
+            // category department.
+            let department = await Department.findOne({ where: { department_id: category.department_id } });
+            category.department = department;
+            product.category = category;
+
+        }
+        return res.json(product);
+    }
+    catch ( e ) {
         console.error(e);
         return res.status(500).json({ code: 'SRV_01', message: 'Server error' });
     }

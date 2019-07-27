@@ -1,0 +1,114 @@
+@import '../../../styles/colors.scss';
+
+.itf-title {
+    max-width: 600px;
+}
+
+.filter-color {
+    box-shadow: none;   
+    width: 20px;
+}
+
+ .filter-color:hover {
+    box-shadow: 2px 2px 3px lightgray!important;
+    cursor: pointer;
+ }
+
+ .filter-color.filter-color-active {
+    box-shadow: 2px 2px 3px lightgray;
+ }
+
+ .filter-size-btn:hover {
+    box-shadow: 2px 2px 3px lightgray;
+ }
+
+ .itf-quantity {
+    button {
+        i {
+            font-size: 18px;
+        }
+    }
+ }
+
+ .review-like-icon {
+    font-size: 18px;
+ }
+
+ .rec-container {
+    overflow-x: scroll;
+ }
+
+ .itf-img-set-item {
+     width: 200px;
+     height: 200px;
+ }
+
+ .item-cur-image {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+ }
+
+ .shine {
+    background: #f6f7f8;
+    background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+    background-repeat: no-repeat;
+    background-size: 800px 325px; 
+    display: inline-block;
+    position: relative; 
+    
+    -webkit-animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards; 
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: placeholderShimmer;
+    -webkit-animation-timing-function: linear;
+ }
+
+ .shine-fa {
+    color: #f6f7f8;
+    color: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+    display: inline-block;
+    position: relative; 
+    
+    -webkit-animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards; 
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: placeholderShimmer;
+    -webkit-animation-timing-function: linear;
+ }
+
+ .placeholder-image {
+    display: block!important;
+    width: 425px; 
+    height: 325px; 
+    margin-top: 15px;
+ }
+
+ .placeholder-image-small {
+    display: block!important;
+    width: 125px; 
+    height: 125px; 
+ }
+ 
+ .itf-img-set-item:hover {
+     border: 1px solid $colorPrimary;
+ }
+
+ .recommendations {
+     margin-top: 5%;
+ }
+
+ .text-cut{
+    text-decoration: line-through;
+ }
+
+ @-webkit-keyframes placeholderShimmer {
+    0% {
+      background-position: -468px 0;
+    }
+    
+    100% {
+      background-position: 468px 0; 
+    }
+  }
+  
