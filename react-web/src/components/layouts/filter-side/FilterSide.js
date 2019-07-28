@@ -10,7 +10,7 @@ class FilterSide extends Component {
 
     state = {
         curMaxValue: this.props.config.max_value || 0,
-        curMinValue: 1,
+        curMinValue: 1, 
         updateFilter : ( data ) => dispatch.updateFilter( data ),
         updateDepartmentFilter: ( departmentName, departmenId,  add ) => {
             let departments = this.props.filter.departments ? this.props.filter.departments : '';

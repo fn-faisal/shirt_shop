@@ -18,6 +18,12 @@
     box-shadow: 2px 2px 3px lightgray;
  }
 
+ .filter-size-btn {
+    .active {
+      box-shadow: 2px 2px 3px lightgray;
+    }
+ }
+
  .filter-size-btn:hover {
     box-shadow: 2px 2px 3px lightgray;
  }

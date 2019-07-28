@@ -12,7 +12,6 @@ export default props => (
                     (<div className="placeholder-image shine"></div>)}
                </a>
                <div className="itf-img-set d-flex justify-content-around">
-                   {/* <img className="itf-img-set-item p-3" onClick={ () => props.updateImage(`a-partridge-in-a-pear-tree.gif`) } src={ props.imageRef(`a-partridge-in-a-pear-tree.gif`) } /> */}
                    { Object.keys(props.product.single).length > 0 ?  
                     (<img className="itf-img-set-item p-3" onClick={ () => props.updateImage(props.product.single.image) } src={ props.imageRef(props.product.single.image) } /> ) :
                     (<div className="placeholder-image-small shine"></div>)}
@@ -64,8 +63,8 @@ export default props => (
                { Object.keys(props.product.single).length === 0 && (<h5 className="itf-price"><span className="py-3 shine w-75"></span></h5>)}
                { Object.keys(props.product.single).length > 0 && 
                     (
-                        <div className="d-flex justify-conten-between my-3">
-                            { props.product.single.colors.map( color => <span className="filter-color badge mx-2 rounded-circle p-1" style={{ backgroundColor: color.value }}>  </span> ) }
+                        <div className="d-flex justify-conten-between my-3" >
+                            { props.product.single.colors.map( color => <span onClick={ () => props.updateFilter({ color: color.value, color_id: color.attribute_value_id }) } className={`filter-color ${ props.filter.color === color.value ? 'filter-color-active' : '' } badge mx-2 rounded-circle p-1`} style={{ backgroundColor: color.value }}>  </span> ) }
                         </div>
                     )
                 }
@@ -76,8 +75,8 @@ export default props => (
                     (
                         <ul className="nav nav-pills filter-size">
                             { props.product.single.sizes.map( size => 
-                                <li className="nav-item">
-                                    <a className="filter-size-btn nav-link text-white m-2 filter-size-item" href="#">{size.value}</a>
+                                <li className="nav-item" onClick={ () => props.updateFilter({ size: size.value, size_id: size.attribute_value_id }) } >
+                                    <a className={`filter-size-btn nav-link text-white m-2 filter-size-item ${ props.filter.size === size.value ? 'active' : '' }`} href="#">{size.value}</a>
                                 </li>
                             )}
                         </ul>
@@ -103,13 +102,13 @@ export default props => (
                <hr/>
                <h5 className="card-title text-muted mt-4">Quantity</h5>
                <div className="itf-quantity">
-                   <button className="btn btn-sm rounded-circle px-2 py-2">
+                   <button className="btn btn-sm rounded-circle px-2 py-2" onClick={ () => props.decQuantity() }>
                        <i className="fa fa-minus"></i>
                    </button>
                    <button className="btn btn-sm btn-disabled shadow-sm border bg-transparent rounded-pill px-3 py-1">
-                       <span className="itf-quantity">0</span>
+                       <span className="itf-quantity">{ props.quantity }</span>
                    </button>
-                   <button className="btn btn-sm rounded-circle px-2 py-2">
+                   <button className="btn btn-sm rounded-circle px-2 py-2" onClick={ () => props.incQuantity() }>
                        <i className="fa fa-plus"></i>
                    </button>
                </div>

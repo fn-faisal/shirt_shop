@@ -5,7 +5,10 @@ import vHeader from './Header.jsx';
 import { connect } from 'react-redux';
 
 class Header extends Component {
-    render = () => vHeader(this.state)
+    state = {
+        toggleCart: () => $('.cart-dropdown').css('display', $('.cart-dropdown').css('display') === 'none' ? 'block' : 'none')
+    }
+    render = () => vHeader({...this.state, ...this.props})
 }
 
 const mapStateToProps = state => state;

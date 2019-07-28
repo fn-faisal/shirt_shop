@@ -1,6 +1,45 @@
+@import '../../../styles/colors.scss';
 .title {
-    font-family: 'Lato', sans-serif;
-    letter-spacing: 3px;
-    font-weight: bold;
-  }
+  font-family: 'Lato', sans-serif;
+  letter-spacing: 3px;
+  font-weight: bold;
+}
 
+// .cart-icon-mutate-qt {
+//   font-size: 10px;
+// }
+
+// .itf-quantity {
+//   font-size: 12px;
+// }
+
+// /* cart dropdown */
+// .cart-btn.dropdown-toggle::after {
+//   display: none !important;
+// }
+
+// .cart-dropdown {
+//   margin-top: 40px;
+//   padding: 10px;
+//   /* padding: 10px 70px; */
+//   border-radius: 0px;
+//   width: 600px;
+//   max-height: 70vh;
+//   overflow-y: scroll;
+// }
+
+// .sticky {
+//   position: fixed;
+//   width: 100%;
+// }
+
+// /* cart btn */
+// .cart-btn {
+//   border-radius: 50%;
+//   transition: background-color ease-in 0.5s, padding ease-in 0.5s;
+// }
+
+// .cart-btn:hover {
+//   background-color: $colorPrimary !important;
+//   padding: 5px 7px;
+// }
