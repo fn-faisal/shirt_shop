@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
 
 // var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
@@ -21,6 +22,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// Use the session middleware
+app.use(session({ secret: process.env.CART_SESSION_SECRET || 'turing', cookie: { maxAge: process.env.CART_SESSION_MAX_AGE || 3600000 }}))
+
 
 app.use('/api', apiRouter);
 app.use('/', (req, res) => res.send('Hello server udate') );

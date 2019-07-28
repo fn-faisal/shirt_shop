@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const { Model, STRING, INTEGER, TEXT, literal, ENUM, DECIMAL, SMALLINT } = Sequelize;
+const { Model, DATE, STRING, INTEGER, TEXT, TINYINT, literal, ENUM, DECIMAL, SMALLINT, CHAR } = Sequelize;
 
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
   host: process.env.DB_HOST,
@@ -27,7 +27,8 @@ const model = {
     Attribute: 'attribute',
     AttributeValue: 'attribute_value',
     Department: 'department',
-    Category: 'category'
+    Category: 'category',
+    ShoppingCart: 'shopping_cart'
 }
 
 class Customer extends Model {}
@@ -39,6 +40,7 @@ class Attribute extends Model {}
 class AttributeValue extends Model {}
 class Department extends Model {}
 class Category extends Model {}
+class ShoppingCart extends Model {}
 
 module.exports.Customer = Customer.init({
     customer_id: { type: INTEGER, autoIncrement: true, primaryKey: true },
@@ -113,3 +115,13 @@ module.exports.ProductCategory = ProductCategory.init({
     product_id : { type: INTEGER, allowNull: false },
     category_id: { type: INTEGER, allowNull: false },
 }, { sequelize, freezeTableName: true, modelName: model.ProductCategory, timestamps: false });
+
+module.exports.ShoppingCart = ShoppingCart.init({
+    item_id : { type: INTEGER, autoIncrement: true, primaryKey: true },
+    cart_id: { type: CHAR(32), allowNull: false },
+    product_id: { type: INTEGER(11), allowNull: false },
+    attributes: { type: STRING(1000), allowNull: false },
+    quantity: { type: INTEGER, allowNull: false },
+    buy_now: { type: TINYINT(1), allowNull: false, defaultValue: 1 },
+    added_on: { type: DATE, allowNull: false, defaultValue: Date.now() }
+}, { sequelize, freezeTableName: true, modelName: model.ShoppingCart, timestamps: false });

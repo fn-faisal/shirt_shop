@@ -3,6 +3,7 @@ const { validationResult } = require('express-validator');
 module.exports.validate = (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+        console.log(JSON.stringify(errors.errors[0].msg));
         let { msg: { code, message }, param } = errors.errors[0];
         return res.status(400).json({ 
             code: code,
@@ -22,6 +23,24 @@ module.exports.userErrorCodes = {
     notfound: ( field ) => { return { code: 'USR_05', message: `The ${field} doesn't exist.` } }
 }
 
+module.exports.productErrorCodes = {
+    notfound: ( field ) => { return { code: 'PRD_01', message: `The ${field} doesn't exist.` } }
+}
+
 module.exports.queryErrorCodes = {
     type: ( field, type ) => { return { code: 'QRY_01', message: `The query parameter ${field} must be of type ${type}` } },
+}
+
+module.exports.authErrorCodes = {
+    emptyToken : (  ) => { return { code: 'AUT_01', message: `Authorization code is empty` } },
+    notAllowed : () => { return { code: 'AUT_02', message: `Access Unauthorized`, code: 401 } }
+}
+
+module.exports.cartErrorCodes = {
+    empty : (field) => { return { code: 'CRT_01', message: `The field ${field} is required` } },
+    invalidId: () => { return { code: 'CRT_02', message: 'The cart id is invalid' } }
+}
+
+module.exports.serverErrorCodes = {
+    misc: () => { return { code: 'SRV_01', message: 'An error occured!' } }
 }
