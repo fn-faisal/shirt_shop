@@ -14,9 +14,11 @@ import error from './error/error.reducer';
 import filter from './filter/filter.reducer';
 // products.
 import product from './product/product.reducer';
+// cart.
+import cart from './cart/cart.reducer';
 
 //-------------------------------------------
 // Combine reducers.
 //-------------------------------------------
 
-export default combineReducers({ auth, error, config, filter, product });
+export default combineReducers({ auth, error, config, filter, product, cart });
