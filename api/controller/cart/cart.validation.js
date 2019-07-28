@@ -18,3 +18,16 @@ module.exports.cart_add_validation = [
                 } ).catch( err => { console.error(err); reject(misc()) } ) ) ),
     check('attributes').not().isEmpty().withMessage( empty('attributes') ).trim().escape()
 ];
+
+module.exports.get_cart_validation = [
+    check('cart_id').not().isEmpty().withMessage(empty('cart_id'))
+];
+
+module.exports.update_cart_validation = [
+    check('item_id').not().isEmpty().withMessage(empty('item_id')),
+    check('quantity').not().isEmpty().withMessage(empty('quantity'))
+];
+
+module.exports.remove_cart_item_validation = [
+    check('item_id').not().isEmpty().withMessage(empty('item_id')),
+];

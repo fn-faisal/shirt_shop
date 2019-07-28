@@ -38,7 +38,8 @@ module.exports.authErrorCodes = {
 
 module.exports.cartErrorCodes = {
     empty : (field) => { return { code: 'CRT_01', message: `The field ${field} is required` } },
-    invalidId: () => { return { code: 'CRT_02', message: 'The cart id is invalid' } }
+    invalidId: () => { return { code: 'CRT_02', message: 'The cart id is invalid' } },
+    notfound: ( field ) => { return { code: 'CRT_03', message: `The ${field} doesn't exist.` } }
 }
 
 module.exports.serverErrorCodes = {

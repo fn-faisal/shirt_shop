@@ -1,6 +1,8 @@
 const cryptoRandomString = require('crypto-random-string');
-const { serverErrorCodes: { misc } } = require('../../utils');
+const { serverErrorCodes: { misc }, cartErrorCodes: { notfound } } = require('../../utils');
 const { ShoppingCart } = require('../../model/schema');
+
+const { QueryInterface } = require('sequelize');
 
 module.exports.generateUniqueId = async ( req, res ) => {
     let cart_id = cryptoRandomString({ length: 32, type: 'url-safe' });
@@ -20,7 +22,52 @@ module.exports.addToCart = async ( req, res ) => {
         return res.json([{...shoppingCart.toJSON(), price}]);
     } catch( e ) {
         console.error(e);
-        return res.json({...misc});
+        return res.json(misc);
     }
+}
 
+module.exports.getCart = async ( req, res ) => {
+    try {
+        let cart = await ShoppingCart.findAll({ where: { cart_id: req.params.cart_id } });
+        return res.json(cart);
+    } catch ( e ) {
+        console.error(e);
+        return res.json(misc);
+    }
+}
+
+module.exports.updateCartItem = async ( req, res ) => {
+    try {
+        let cartItem = await ShoppingCart.findOne({ where: { item_id: req.params.item_id } })
+        if ( cartItem ) {
+            await cartItem.update({ quantity: req.body.quantity });
+            return res.json([cartItem]);
+        }
+        return res.json( notfound('cart-item') );
+    } catch( e ) {
+        console.error(e);
+        return res.json(misc);
+    }
+}
+
+module.exports.clearCart = async ( req, res ) => {
+    try {
+        let cart = await ShoppingCart.findAll({ where: { cart_id: req.params.cart_id } })
+        cart.map( c => c.destroy() );
+        return res.json([]);
+    } catch ( e ) {
+        console.error(e);
+        return res.json(misc);
+    }
+}
+
+module.exports.removeItem = async ( req, res ) => {
+    try {
+        let cartItem = await ShoppingCart.findOne({ where: { item_id: req.params.item_id } });
+        cartItem.destroy();
+        return res.json();
+    } catch ( e ) {
+        console.error(e);
+        return res.json(misc);
+    }
 }
