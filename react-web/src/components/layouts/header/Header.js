@@ -6,8 +6,11 @@ import { connect } from 'react-redux';
 
 class Header extends Component {
     state = {
-        toggleCart: () => $('.cart-dropdown').css('display', $('.cart-dropdown').css('display') === 'none' ? 'block' : 'none')
+        toggleCart: () => {
+            $('.cart-dropdown').css('display', $('.cart-dropdown').css('display') === 'none' ? 'block' : 'none');
+        }
     }
+
     render = () => vHeader({...this.state, ...this.props})
 }
 

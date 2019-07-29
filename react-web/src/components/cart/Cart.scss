@@ -17,7 +17,7 @@
     padding: 10px;
     /* padding: 10px 70px; */
     border-radius: 0px;
-    width: 600px;
+    width: 60vw;
     max-height: 70vh;
     overflow-y: scroll;
 }
@@ -40,4 +40,8 @@
 .cart-item-img {
     width: 100px;
     height: 100px;
+}
+
+.cii-description {
+    font-size: 10px;
 }

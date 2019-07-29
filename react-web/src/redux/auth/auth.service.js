@@ -77,7 +77,7 @@ export const loginFacebook = async ( access_token ) => {
     } catch( e ) {
         console.error(e);
         return { errors: [{ error: 'An error occurred' }] };
-    }
+    } 
 }
 
 export const loadSession = () => {

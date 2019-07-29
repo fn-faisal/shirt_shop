@@ -64,7 +64,7 @@ export default props => (
                { Object.keys(props.product.single).length > 0 && 
                     (
                         <div className="d-flex justify-conten-between my-3" >
-                            { props.product.single.colors.map( color => <span onClick={ () => props.updateFilter({ color: color.value, color_id: color.attribute_value_id }) } className={`filter-color ${ props.filter.color === color.value ? 'filter-color-active' : '' } badge mx-2 rounded-circle p-1`} style={{ backgroundColor: color.value }}>  </span> ) }
+                            { props.product.single.colors.map( (color, k) => <span key={k} onClick={ () => props.updateFilter({ color: color.value, color_id: color.attribute_value_id }) } className={`filter-color ${ props.filter.color === color.value ? 'filter-color-active' : '' } badge mx-2 rounded-circle p-1`} style={{ backgroundColor: color.value }}>  </span> ) }
                         </div>
                     )
                 }
@@ -74,8 +74,8 @@ export default props => (
                { Object.keys(props.product.single).length > 0 && 
                     (
                         <ul className="nav nav-pills filter-size">
-                            { props.product.single.sizes.map( size => 
-                                <li className="nav-item" onClick={ () => props.updateFilter({ size: size.value, size_id: size.attribute_value_id }) } >
+                            { props.product.single.sizes.map( (size, k) => 
+                                <li key={k} className="nav-item" onLoad={ () => console.log(`Loaded ${size.value} size`) } onClick={ () => props.updateFilter({ size: size.value, size_id: size.attribute_value_id }) } >
                                     <a className={`filter-size-btn nav-link text-white m-2 filter-size-item ${ props.filter.size === size.value ? 'active' : '' }`} href="#">{size.value}</a>
                                 </li>
                             )}
@@ -113,7 +113,7 @@ export default props => (
                    </button>
                </div>
                <div className="itf-actions d-flex justify-content-around mt-4">
-                   <a href="javascript:void(0)" id="addToCartBtn" className="btn btn-flat btn-danger rounded-pill">Add To Cart</a>
+                   <a href="javascript:void(0)" id="addToCartBtn" className="btn btn-flat btn-danger rounded-pill" onClick={ () => props.addToCart() }>Add To Cart</a>
                    <a href="#" className="btn btn-flat btn-transparent rounded-pill shadow-none"> <i className="fa fa-heart text-light mr-2"></i> Add to wishlist</a>
                </div>
            </div>

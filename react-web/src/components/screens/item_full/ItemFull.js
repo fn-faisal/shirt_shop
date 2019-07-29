@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import productDispatch from '../../../redux/product/product.dispatch';
 import filterDispatch from '../../../redux/filter/filter.dispatch';
+import cartDispatch from '../../../redux/cart/cart.dispatch';
 
 import view from './ItemFull.jsx';
 
@@ -16,6 +17,12 @@ class ItemFull extends Component {
         imageRef: (img) => `${process.env.API_HOST}:${process.env.API_PORT}/img/products/${img}`,
         updateFilter : ( data ) => filterDispatch.updateFilter( data ),
         clearFilter : () => filterDispatch.clearFilter(),
+        addToCart : () => {
+            if ( !this.props.filter.color || !this.props.filter.size )
+                alert('Please select a size and a color');
+            let attributes = `${this.props.filter.size} ${this.props.filter.color}`;
+            cartDispatch.addToCart( this.props.auth.token, this.props.cart.cart_id ,this.props.product.single.product_id, attributes, this.state.quantity );
+        }
     }
     componentDidUpdate = () => {
         // update props.
