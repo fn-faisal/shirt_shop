@@ -1,5 +1,7 @@
 import React from "react";
-import './Cart.scss'
+import './Cart.scss';
+
+import { Link } from 'react-router-dom';
 
 export default props => (
     <div className="cart dropdown">
@@ -76,7 +78,8 @@ export default props => (
                                 <a href="javascript:void(0)" onClick={ () => props.toggleCart() } className="btn btn-flat btn-white rounded-pill text-danger">Back to Shop</a>
                             </td>
                             <td className="text-right" colSpan="2">
-                                <a href="#" className="btn btn-flat btn-danger rounded-pill white-text">Checkout</a>
+                                <Link to={`checkout`} className="btn btn-flat btn-danger rounded-pill white-text"> Checkout </Link>
+                                {/* <a href="#" className="btn btn-flat btn-danger rounded-pill white-text">Checkout</a> */}
                             </td>
                         </tr>
                     </tfoot>
