@@ -1,7 +1,31 @@
+@import '../../../styles/colors.scss';
+
 .content {
     margin: 30px;
 }
 
 .active a {
     background-color: transparent !important;
+}
+
+.md-form {
+    .active {
+        color: $colorAccent!important;
+        border-bottom: none;
+    }
+    .form-control-sm {
+        border-bottom: none;
+    }
+    input[type=text]:focus:not([readonly]),input[type=password]:focus:not([readonly])  { 
+        -webkit-box-shadow: 0 1px 0 0 $colorAccent;
+        box-shadow: 0 1px 0 0 $colorAccent;
+        border-bottom: none;
+        color: $colorInversePrimary;
+    }
+    input:active { 
+        border-bottom: none;
+    }
+    input { 
+        border-bottom: none;
+    }
 }

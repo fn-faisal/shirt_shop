@@ -78,7 +78,7 @@ export default props => (
                                 <a href="javascript:void(0)" onClick={ () => props.toggleCart() } className="btn btn-flat btn-white rounded-pill text-danger">Back to Shop</a>
                             </td>
                             <td className="text-right" colSpan="2">
-                                <Link to={`checkout`} className="btn btn-flat btn-danger rounded-pill white-text"> Checkout </Link>
+                                <Link to={`checkout`} onClick={ () => props.toggleCart() } className="btn btn-flat btn-danger rounded-pill white-text"> Checkout </Link>
                                 {/* <a href="#" className="btn btn-flat btn-danger rounded-pill white-text">Checkout</a> */}
                             </td>
                         </tr>

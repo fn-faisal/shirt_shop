@@ -28,7 +28,8 @@ const model = {
     AttributeValue: 'attribute_value',
     Department: 'department',
     Category: 'category',
-    ShoppingCart: 'shopping_cart'
+    ShoppingCart: 'shopping_cart',
+    ShippingRegion: 'shipping_region'
 }
 
 class Customer extends Model {}
@@ -41,6 +42,7 @@ class AttributeValue extends Model {}
 class Department extends Model {}
 class Category extends Model {}
 class ShoppingCart extends Model {}
+class ShippingRegion extends Model {}
 
 module.exports.Customer = Customer.init({
     customer_id: { type: INTEGER, autoIncrement: true, primaryKey: true },
@@ -125,3 +127,8 @@ module.exports.ShoppingCart = ShoppingCart.init({
     buy_now: { type: TINYINT(1), allowNull: false, defaultValue: 1 },
     added_on: { type: DATE, allowNull: false, defaultValue: Date.now() }
 }, { sequelize, freezeTableName: true, modelName: model.ShoppingCart, timestamps: false });
+
+module.exports.ShippingRegion = ShippingRegion.init({
+    shipping_region_id: { type: INTEGER, autoIncrement: true, primaryKey: true },
+    shipping_region : { type: STRING, allowNull: false }
+}, { sequelize, freezeTableName: true, modelName: model.ShippingRegion, timestamps: false });

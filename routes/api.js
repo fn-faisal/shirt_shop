@@ -30,4 +30,11 @@ router.use( '/products', Product );
 const Cart = require('../api/controller/cart/cart.route');
 router.use( '/shoppingcart', Cart );
 
+//-------------------------------------------
+// Stripe.
+//-------------------------------------------
+
+const Stripe = require('../api/controller/stripe/stripe.route');
+router.use( '/stripe', Stripe );
+
 module.exports = router;

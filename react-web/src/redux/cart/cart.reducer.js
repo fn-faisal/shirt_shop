@@ -10,7 +10,6 @@ const inital = { cart_id: undefined, cart: [], refresh: false };
 
 export default ( state = inital, action ) => {
     if ( hasError(action) === true ) return state;
-    console.log(action.payload);
     switch ( action.type ) {
         case ADD_TO_CART:
             state = { ...state, ...action.payload, refresh: true };

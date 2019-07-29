@@ -2,8 +2,6 @@ const cryptoRandomString = require('crypto-random-string');
 const { serverErrorCodes: { misc }, cartErrorCodes: { notfound } } = require('../../utils');
 const { ShoppingCart } = require('../../model/schema');
 
-const { QueryInterface } = require('sequelize');
-
 module.exports.generateUniqueId = async ( req, res ) => {
     let cart_id = cryptoRandomString({ length: 32, type: 'url-safe' });
     // save token in session for validation. MAX AGE can be updated from env

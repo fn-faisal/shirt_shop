@@ -1,12 +1,13 @@
 import { createAction } from '../utils';
 
 // services.
-import { register, loadSession, login, loginFacebook, endSession } from './auth.service';
+import { register, loadSession, login, loginFacebook, endSession, updateUser } from './auth.service';
 
 export const ACTIONS = {
     REGISTER: 'REGISTER',
     LOGIN: 'LOGIN',
     LOGIN_FACEBOOK: 'LOGIN_FACEBOOK',
+    UPDATE_USER: 'UPDATE_USER',
     LOAD: 'LOAD',
     LOGOUT: 'LOGOUT'  
 } 
@@ -32,7 +33,11 @@ export const initializers = {
     },
     logout: () => {
         let payload = endSession();
-        console.log(payload);
         return createAction( ACTIONS.LOGOUT, { profile: {}, token: undefined } )
+    },
+    updateUser: (token, data) => async( dispatch ) => {
+        console.log(data);
+        let payload = await updateUser( token, data );
+        return dispatch(createAction( ACTIONS.UPDATE_USER, { profile: payload } ));
     }
 }

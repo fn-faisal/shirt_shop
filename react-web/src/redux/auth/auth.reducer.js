@@ -4,7 +4,7 @@ import { ACTIONS } from './auth.action';
 import { hasError } from '../utils';
 
 // Deconstruct actions for ease of access
-const { REGISTER, LOAD, LOGIN, LOGIN_FACEBOOK,LOGOUT } = ACTIONS;
+const { REGISTER, LOAD, LOGIN, LOGIN_FACEBOOK,LOGOUT, UPDATE_USER } = ACTIONS;
 
 //-------------------------------------------
 // The initial auth state.
@@ -19,6 +19,7 @@ export default ( state = initial, action ) => {
         case LOGIN:
         case LOGIN_FACEBOOK:
         case LOGOUT:
+        case UPDATE_USER:
             state = { ...state, ...action.payload };
         break;
     }

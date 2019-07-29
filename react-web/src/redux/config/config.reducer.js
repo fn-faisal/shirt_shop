@@ -9,7 +9,7 @@ const { LOAD_CONFIG } = ACTIONS;
 //-------------------------------------------
 // The initial config state.
 //-------------------------------------------
-const initial = { colors: [], sizes: [], max_value: 10, departments : [], categories: [] };
+const initial = { colors: [], sizes: [], max_value: 10, departments : [], categories: [], shipping_regions: [] };
 
 export default ( state = initial, action ) => { 
     if ( hasError(action) === true ) return state;

@@ -108,6 +108,14 @@ export default props => (
                 <GooglePlacesAutocomplete
                   onSelect={ props.updatePlace }
                 />
+                
+                <div className="md-form form-sm">
+                    <select class="form-control" onChange={ e => props.setRegion(e.target.value) }>
+                        { props.config.shipping_regions.map( (r, k) => 
+                            ( <option key={k} disabled={k === 0} selected={ k === 0 } value={JSON.stringify(r)}>{ r.shipping_region }</option>)
+                        ) }
+                    </select>
+                </div>
                 <div className="md-form form-sm">
                     <input type="text" className={`form-control form-control-sm`} />
                     <label> { props.address.address_1 === '' ? 'Address 1' : props.address.address_1 } </label>
@@ -115,6 +123,10 @@ export default props => (
                 <div className="md-form form-sm">
                     <input type="text" className={`form-control form-control-sm`} />
                     <label> { props.address.address_2 === '' ? 'Address 2' : props.address.address_2 } </label>
+                </div>
+                <div className="md-form form-sm">
+                    <input type="text" className={`form-control form-control-sm`} />
+                    <label> { props.address.city === '' ? 'City' : props.address.city } </label>
                 </div>
                 <div className="md-form form-sm">
                     <input type="text" className={`form-control form-control-sm`} />
@@ -128,7 +140,7 @@ export default props => (
                     <input type="text" className={`form-control form-control-sm`} />
                     <label> { props.address.postalcode === '' ? 'Postal Code' : props.address.postalcode } </label>
                 </div>
-                <button className="btn btn-primary" onClick={() => props.stepper.next()}>Continue</button>
+                <button className="btn btn-primary" onClick={() => { props.updateAddress(); props.stepper.next();}}>Continue</button>
               </div>
               <div id="test-l-3" className="content text-center">
                 <button type="submit" className="btn btn-primary mt-5">Submit</button>

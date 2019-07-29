@@ -45,3 +45,8 @@ module.exports.cartErrorCodes = {
 module.exports.serverErrorCodes = {
     misc: () => { return { code: 'SRV_01', message: 'An error occured!' } }
 }
+
+module.exports.stripeErrorCodes = {
+    empty : (field) => { return { code: 'STRP_01', message: `The field ${field} is required` } },
+    
+}

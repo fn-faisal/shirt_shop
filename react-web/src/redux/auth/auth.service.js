@@ -85,3 +85,16 @@ export const loadSession = () => {
 }
 
 export const endSession = () => cookie.remove('session')
+
+export const updateUser = async ( token, data ) => {
+    try {
+        // call the api
+        let response = await axios.put( `${api}/${ep_customer}`, data, { headers: { Authorization: token } });
+        if ( response.status === 200 ) {
+            return response.data;
+        } else console.log(response);
+    } catch ( e ) {
+        console.error(e);
+        return { errors: [{ error: 'An error occurred' }] };
+    }
+}
