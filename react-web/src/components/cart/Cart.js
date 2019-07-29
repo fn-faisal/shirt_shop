@@ -58,7 +58,6 @@ class Cart extends Component {
 
 
     componentWillUpdate = () => {
-        console.log(this.state.products);
         if ( this.props.auth.token && !this.props.cart.cart_id ) {
             dispatch.initCart(this.props.auth.token);
         }
