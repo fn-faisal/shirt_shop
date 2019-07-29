@@ -1,13 +1,14 @@
 import { createAction } from '../utils';
 
 // services.
-import { init, getCart, addToCart } from './cart.service';
+import { init, getCart, addToCart, updateCart, removeCartItem } from './cart.service';
 
 export const ACTIONS = {
     INIT_CART: 'INIT_CART',
     GET_CART: 'GET_CART',
     ADD_TO_CART: 'ADD_TO_CART',
-    UPDATE_CART: 'UPDATE_CART'
+    UPDATE_CART: 'UPDATE_CART',
+    REMOVE_CART_ITEM: 'REMOVE_CART_ITEM'
 };
 
 export const initializers = {
@@ -24,7 +25,12 @@ export const initializers = {
         let cart = await getCart(token, cart_id);
         return dispatch( createAction( ACTIONS.GET_CART, cart ) )
     },
-    updateCart: () => async ( dispatch ) => {
-        return dispatch( createAction( ACTIONS.UPDATE_CART, {} ) )
+    updateCart: ( token, item_id, quantity ) => async ( dispatch ) => {
+        let cart = await updateCart( token, item_id, quantity );
+        return dispatch( createAction( ACTIONS.UPDATE_CART, cart ) );
+    },
+    removeCartItem: ( token, item_id ) => async ( dispatch ) => {
+        let cart = await removeCartItem( token, item_id );
+        return dispatch( createAction( ACTIONS.REMOVE_CART_ITEM, cart ) );
     }
 };

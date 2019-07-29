@@ -40,25 +40,25 @@ export default props => (
                                             <div className="cart-item-info mx-4 align-self-center d-flex flex-column justify-content-center">
                                                 <h6 className="cii-title">{ product.name }</h6>
                                                 <span className="cii-description text-muted">{ product.description }</span>
-                                                <a href="#"> <i className="fa fa-times text-danger mr-1"></i> <small className="text-muted">Remove</small>  </a>
+                                                <a href="javascript:void(0)" onClick={ () => props.removeItem(i.item_id) }> <i className="fa fa-times text-danger mr-1"></i> <small className="text-muted">Remove</small>  </a>
                                             </div>
                                         </td>
                                         <td>{ i.attributes.split(' ')[0] }</td>
                                         <td>
                                             <div className="itf-quantity">
-                                                <button className="btn btn-sm rounded-circle px-1 py-0">
+                                                <button className="btn btn-sm rounded-circle px-1 py-0" onClick={ () => i.quantity > 1 ? props.updateQuantity( i.item_id, --i.quantity ) : {} }>
                                                     <i className="fa fa-minus cart-icon-mutate-qt"></i>
                                                 </button>
                                                 <button className="btn btn-sm btn-disabled shadow-sm border bg-transparent rounded-pill px-3 py-0">
                                                     <span className="itf-quantity">{ i.quantity }</span>
                                                 </button>
-                                                <button className="btn btn-sm rounded-circle px-1 py-0">
+                                                <button className="btn btn-sm rounded-circle px-1 py-0" onClick={ () => props.updateQuantity( i.item_id, ++i.quantity ) }>
                                                     <i className="fa fa-plus cart-icon-mutate-qt"></i>
                                                 </button>
                                             </div>
                                         </td>
                                         <td>
-                                            <h5>&pound;{ props.getProductPrice(product) * i.quantity }</h5>
+                                            <h5>&pound;{ (props.getProductPrice(product) * i.quantity).toFixed(2) }</h5>
                                             
                                         </td>
                                     </tr>
@@ -69,7 +69,7 @@ export default props => (
                     <tfoot>
                         <tr>
                             <td colSpan="3"><h4>TOTAL</h4></td>
-                            <td> &pound; { props.getTotalPrice() } </td>
+                            <td> &pound; { props.getTotalPrice().toFixed(2) } </td>
                         </tr>
                         <tr>
                             <td className="text-left" colSpan="2">

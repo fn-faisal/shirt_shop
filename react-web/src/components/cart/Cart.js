@@ -13,6 +13,12 @@ class Cart extends Component {
     state = {
         products: [],
         toggleCart: this.props.toggleCart,
+        updateQuantity: ( item_id, quantity ) => {
+            dispatch.updateCart( this.props.auth.token, item_id, quantity );
+        },
+        removeItem : ( item_id ) => {
+            dispatch.removeCartItem( this.props.auth.token, item_id );
+        },
         updateCart: () => {
             if ( this.props.auth.token && this.props.cart.cart_id )
                 dispatch.getCart( this.props.auth.token, this.props.cart.cart_id )
