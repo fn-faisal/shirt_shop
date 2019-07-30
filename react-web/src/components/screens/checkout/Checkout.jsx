@@ -14,17 +14,17 @@ export default props => (
               </button>
             </div>
             <div className="line"></div>
-            <div className="step" data-target="#test-l-2">
+            <div className="step" data-target="#checkout-address">
               <button className="step-trigger">
                 <span className="bs-stepper-circle">2</span>
-                <span className="bs-stepper-label">Shipping</span>
+                <span className="bs-stepper-label">Delivery Address</span>
               </button>
             </div>
             <div className="line"></div>
-            <div className="step" data-target="#test-l-3">
+            <div className="step" data-target="#checkout-payment-shipping">
               <button className="step-trigger">
                 <span className="bs-stepper-circle">3</span>
-                <span className="bs-stepper-label">Payment</span>
+                <span className="bs-stepper-label">Payment & Shipping</span>
               </button>
             </div>
           </div>
@@ -104,7 +104,7 @@ export default props => (
                 </div>
                 <button className="btn btn-primary" onClick={() => props.stepper.next()}>Next</button> */}
             </div>
-              <div id="test-l-2" className="content">
+            <div id="checkout-address" className="content">
                 <GooglePlacesAutocomplete
                   onSelect={ props.updatePlace }
                 />
@@ -142,8 +142,47 @@ export default props => (
                 </div>
                 <button className="btn btn-primary" onClick={() => { props.updateAddress(); props.stepper.next();}}>Continue</button>
               </div>
-              <div id="test-l-3" className="content text-center">
-                <button type="submit" className="btn btn-primary mt-5">Submit</button>
+            <div id="checkout-payment-shipping" className="content text-center">
+                <div className="md-form form-sm">
+                    <input type="text" className={`form-control form-control-sm`} data-inputmask="'mask': '9999 - 9999 - 9999 - 9999'" />
+                    <label> CREDIT CARDT NUMBER </label>
+                </div>
+                <div className="d-flex justify-content-between">
+                    <div className="md-form form-sm w-100">
+                        <input type="text" className={`form-control form-control-sm`} data-inputmask="'mask': '9 9 9 9'"/>
+                        <label> CVV </label>
+                    </div>
+                    <div className="md-form form-sm w-100">
+                        <input type="text" className={`form-control form-control-sm`} data-inputmask-inputformat="mm / yyyy" data-inputmask-alias="datetime"/>
+                        <label> Expiry </label>
+                    </div>
+                </div>
+                <select class="form-control" onChange={ (e) => props.setShipping(e.target.value) }>
+                    { props.config.shipping.map( (r, k) => 
+                        r.shipping_region_id === props.address.shipping_region_id && <option key={k} disabled={k === 0} selected={ k === 0 } value={JSON.stringify(r)}>{ `${r.shipping_type}` } </option>
+                    ) }
+                </select>
+                <div className="md-form form-sm">
+                    <input type="text" className={`form-control form-control-sm disabled`} />
+                    <label> { props.config.tax.tax_percentage } </label>
+                </div>
+                <hr/>
+                <div className="md-form form-sm">
+                    <input type="text" className={`form-control form-control-sm disabled`} />
+                    <label> SUBTOTAL : &pound; {props.getTotalPrice()} </label>
+                </div>
+                <div className="d-flex justify-content-between mx-2">
+                    <small> Sales Tax </small>
+                    <h6> &pound; { (props.getTotalPrice() * (props.config.tax.tax_percentage / 100)).toFixed(2) } </h6>
+                </div>
+                <div className="d-flex justify-content-between mx-2">
+                    <small> Shipping </small>
+                    <h6> &pound; { props.getShippingCost() } </h6>
+                </div>
+                <div className="d-flex justify-content-between mx-2">
+                    <small> Total </small>
+                    <h5> &pound; { (props.getTotalPrice() + parseFloat(props.getShippingCost()) + (props.getTotalPrice() * (props.config.tax.tax_percentage / 100)) ).toFixed(2) } </h5>
+                </div>
               </div>
           </div>
         </div>

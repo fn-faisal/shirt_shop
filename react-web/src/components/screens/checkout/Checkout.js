@@ -14,6 +14,7 @@ import cartDispatch from '../../../redux/cart/cart.dispatch';
 class Checkout extends Component {
 
     state = {
+        shipping: {},
         address: {
             address_1: this.props.auth.profile.address_1 || '',
             address_2: this.props.auth.profile.address_2 || '',
@@ -25,12 +26,22 @@ class Checkout extends Component {
             country: this.props.auth.profile.country || ''
         },
         products: [],
+        getShippingCost: () => {
+            if ( Object.keys(this.state.shipping).length <= 0 ) return 0;
+            return JSON.parse(this.state.shipping).shipping_cost;
+        },
         setRegion: ( r ) => this.setState( prev => {
             r = JSON.parse(r);
-            console.log(r);
             let state = { ...prev };
             state.address.region = r.shipping_region;
             state.address.shipping_region_id = r.shipping_region_id;
+            return state;
+        } ),
+        setShipping : ( r ) => this.setState( prev => {
+            // r = JSON.parse(r);
+            let state = { ...prev };
+            state.shipping = r;
+            console.log(state);
             return state;
         } ),
         updateQuantity: ( item_id, quantity ) => {
@@ -103,6 +114,7 @@ class Checkout extends Component {
     }
 
     componentDidMount = () => {
+        $(":input").inputmask();
         this.stepper = new Stepper(document.querySelector('#stepper1'), {
             linear: false,
             animation: true

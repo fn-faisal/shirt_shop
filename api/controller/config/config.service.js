@@ -1,5 +1,5 @@
 // attributes.
-const { Attribute, AttributeValue, Product, Department, Category, ShippingRegion } = require('../../model/schema');
+const { Attribute, AttributeValue, Product, Department, Category, ShippingRegion, Shipping, Tax } = require('../../model/schema');
 
 const sequelize = require('sequelize');
 
@@ -29,13 +29,21 @@ module.exports.getConfig = async ( req, res ) => {
         // shipping regions.
         let shipping_regions = await ShippingRegion.findAll();
 
+        // shipping types.
+        let shipping = await Shipping.findAll();
+
+        // tax.
+        let tax = await Tax.findOne({ where: { tax_id: 1 } })
+
         return res.json({
             max_value: parseFloat(max_value),
             colors,
             sizes,
             departments,
             categories,
-            shipping_regions
+            shipping,
+            shipping_regions,
+            tax
         })
 
     } catch( e ) {

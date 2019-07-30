@@ -29,7 +29,11 @@ const model = {
     Department: 'department',
     Category: 'category',
     ShoppingCart: 'shopping_cart',
-    ShippingRegion: 'shipping_region'
+    ShippingRegion: 'shipping_region',
+    Shipping: 'shipping',
+    Orders : 'orders',
+    OrderDetails: 'order_detail',
+    Tax: 'tax'
 }
 
 class Customer extends Model {}
@@ -43,6 +47,10 @@ class Department extends Model {}
 class Category extends Model {}
 class ShoppingCart extends Model {}
 class ShippingRegion extends Model {}
+class Shipping extends Model {}
+class Orders extends Model {}
+class OrderDetail extends Model {}
+class Tax extends Model {}
 
 module.exports.Customer = Customer.init({
     customer_id: { type: INTEGER, autoIncrement: true, primaryKey: true },
@@ -132,3 +140,39 @@ module.exports.ShippingRegion = ShippingRegion.init({
     shipping_region_id: { type: INTEGER, autoIncrement: true, primaryKey: true },
     shipping_region : { type: STRING, allowNull: false }
 }, { sequelize, freezeTableName: true, modelName: model.ShippingRegion, timestamps: false });
+
+module.exports.Orders = Orders.init({
+    order_id: { type: INTEGER, autoIncrement: true, primaryKey: true },
+    total_amount: { type: DECIMAL(10, 2), allowNull: false },
+    created_on: { type: DATE, allowNull: false },
+    shipped_on: { type: DATE, allowNull: false },
+    comments: { type: STRING(255) },
+    customer_id: { type: INTEGER, allowNull: false },
+    auth_code: { type: STRING(50) },
+    reference: { type: STRING(50) },
+    shipping_id: { type: INTEGER },
+    tax_id: { type: INTEGER }
+}, { sequelize, freezeTableName: true, modelName: model.Orders, timestamps: false });
+
+module.exports.OrderDetail = OrderDetail.init({
+    item_id: { type: INTEGER, autoIncrement: true, primaryKey: true },
+    order_id: { type: INTEGER, allowNull: false },
+    product_id: { type: INTEGER, allowNull: false },
+    attributes: { type: STRING, allowNull: false },
+    product_name: { type: STRING, allowNull: false },
+    quantity: { type: INTEGER, allowNull: false },
+    unit_cost: { type: DECIMAL(10, 2), allowNull: false }
+}, { sequelize, freezeTableName: true, modelName: model.OrderDetails, timestamps: false });
+
+module.exports.Tax = Tax.init({
+    tax_id: { type: INTEGER, primaryKey: true, autoIncrement: false },
+    tax_type: { type: STRING(100), allowNull: false },
+    tax_percentage: { type: DECIMAL(10, 2), allowNull: false }
+}, { sequelize, freezeTableName: true, modelName: model.Tax, timestamps: false });
+
+module.exports.Shipping = Shipping.init({
+    shipping_id: { type: INTEGER, primaryKey: true, autoIncrement: false },
+    shipping_type: { type: STRING(100), allowNull: false },
+    shipping_cost: { type: DECIMAL(10, 2), allowNull: false },
+    shipping_region_id: { type: INTEGER, allowNull: false }
+}, { sequelize, freezeTableName: true, modelName: model.Shipping, timestamps: false });
