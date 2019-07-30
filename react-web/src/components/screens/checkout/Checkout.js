@@ -10,6 +10,7 @@ import { geocodeByPlaceId } from 'react-google-places-autocomplete';
 
 import authDispatch from '../../../redux/auth/auth.dispatch';
 import cartDispatch from '../../../redux/cart/cart.dispatch';
+import orderDispatch from '../../../redux/order/order.dispatch';
 
 import { tError, tSuccess } from '../../dialogs/alert_utils';
 
@@ -82,6 +83,9 @@ class Checkout extends Component {
                 return false;
             }
             return true;
+        },
+        placeOrder: () => {
+            orderDispatch.createOrder( this.props.auth.token, this.props.cart.cart_id, JSON.parse(this.state.shipping).shipping_id, this.props.config.tax.tax_id )
         },
         setShipping : ( r ) => this.setState( prev => {
             // r = JSON.parse(r);

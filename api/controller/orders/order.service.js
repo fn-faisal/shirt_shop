@@ -1,25 +1,30 @@
 const { serverErrorCodes: { misc } } = require('../../utils');
-const { Orders, OrderDetail, ShoppingCart, Tax, ShippingRegion, Shipping } = require('../../model/schema');
+const { Product, Orders, OrderDetail, ShoppingCart, Tax, ShippingRegion, Shipping } = require('../../model/schema');
 
 const random = require('crypto-random-string');
 
 module.exports.placeOrder = async (req, res) => {
     try {
-        let { cart_id, shipping_region_id } = req.body;
+        let { cart_id, shipping_id } = req.body;
         // cart items.
         let cartItems = await ShoppingCart.findAll({ where: { cart_id } });
 
         // let total.
         let total = 0;
-        cartItems.map( item => total += ((item.discounted_price == 0.00 ? item.price : item.discounted_price) * item.quantity) )
+        cartItems.map( async(item) => {
+            // get the product.
+            let product = await Product.findOne({ where: { product_id: item.product_id } });
+            let price = ((product.discounted_price == 0.00 ? parseFloat(product.price) : parseFloat (product.discounted_price)) * parseInt (item.quantity));
+            total += price;
+        });
 
         // add sales tax to total.
         let tax = await Tax.findOne({ where: { tax_id : 1 } });
-        total += total * ( tax.tax_percentage / 100 );
+        total += total * ( parseInt(tax.tax_percentage) / 100 );
 
         // add shipping cost.
-        let shipping = await Shipping.findOne({ where: { shipping_region_id: shipping_region_id } });
-        total += shipping.shipping_cost;
+        let shipping = await Shipping.findOne({ where: { shipping_id } });
+        total += parseFloat(shipping.shipping_cost);
 
         let reference = random({ length: 7, characters: 'abcdefghijklmnopqrstuvwxyz0123456789' });
         
@@ -34,6 +39,13 @@ module.exports.placeOrder = async (req, res) => {
             shipping_id: shipping.shipping_id,
             tax: tax.tax_id
         });
+
+        cartItems.map( async (item) => {
+            // get the product.
+            let product = await Product.findOne({ where: { product_id: item.product_id } });
+            let price = (product.discounted_price == 0.00 ? parseFloat(product.price) : parseFloat (product.discounted_price));
+            await OrderDetail.create({ order_id: order.order_id, product_id: product.product_id, attributes: item.attributes, product_name: product.name, quantity: item.quantity, unit_cost: price });
+        })
 
         return res.json({ order_id: order.order_id })
 

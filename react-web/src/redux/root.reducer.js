@@ -16,9 +16,11 @@ import filter from './filter/filter.reducer';
 import product from './product/product.reducer';
 // cart.
 import cart from './cart/cart.reducer';
+// order.
+import order from './order/order.reducer';
 
 //-------------------------------------------
 // Combine reducers.
 //-------------------------------------------
 
-export default combineReducers({ auth, error, config, filter, product, cart });
+export default combineReducers({ auth, error, config, filter, product, cart, order });

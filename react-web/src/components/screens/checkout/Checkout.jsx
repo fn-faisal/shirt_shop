@@ -207,11 +207,11 @@ export default props => (
                     <small> Shipping </small>
                     <h6> &pound; { props.getShippingCost() } </h6>
                 </div>
-                <div className="d-flex justify-content-between mx-2">
+                <div className="d-flex justify-content-between mx-2"> 
                     <small> Total </small>
                     <h5> &pound; { (props.getTotalPrice() + parseFloat(props.getShippingCost()) + (props.getTotalPrice() * (props.config.tax.tax_percentage / 100)) ).toFixed(2) } </h5>
                 </div>
-                <a href="javascript:void(0)" className="btn btn-flat btn-white rounded-pill text-danger" onClick={ () => { props.placeOrderValidation(); } }>Place Order</a>
+                <a href="javascript:void(0)" className="btn btn-flat btn-white rounded-pill text-danger" onClick={ () => { props.placeOrderValidation() === true ? props.placeOrder() : {} } }>Place Order</a>
                 
               </div>
           </div>

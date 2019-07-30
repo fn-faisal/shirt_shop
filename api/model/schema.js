@@ -145,7 +145,7 @@ module.exports.Orders = Orders.init({
     order_id: { type: INTEGER, autoIncrement: true, primaryKey: true },
     total_amount: { type: DECIMAL(10, 2), allowNull: false },
     created_on: { type: DATE, allowNull: false },
-    shipped_on: { type: DATE, allowNull: false },
+    shipped_on: { type: DATE },
     comments: { type: STRING(255) },
     customer_id: { type: INTEGER, allowNull: false },
     auth_code: { type: STRING(50) },
