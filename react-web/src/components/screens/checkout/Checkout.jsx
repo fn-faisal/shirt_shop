@@ -110,62 +110,90 @@ export default props => (
                 />
                 
                 <div className="md-form form-sm">
-                    <select class="form-control" onChange={ e => props.setRegion(e.target.value) }>
+                    <select className="form-control" onChange={ e => props.setRegion(e.target.value) }>
                         { props.config.shipping_regions.map( (r, k) => 
-                            ( <option key={k} disabled={k === 0} selected={ k === 0 } value={JSON.stringify(r)}>{ r.shipping_region }</option>)
+                            ( <option key={k} disabled={k === 0} value={JSON.stringify(r)}>{ r.shipping_region }</option>)
                         ) }
                     </select>
+                    <small className={`form-text text-muted ${ props.errors.map( e => e.field ).includes('region') === true && 'text-danger' }`}>
+                        Please Select A Shipping Region *
+                    </small>
                 </div>
                 <div className="md-form form-sm">
-                    <input type="text" className={`form-control form-control-sm`} />
+                    <input type="text" className={`form-control form-control-sm`} onChange={ e => props.updateStateAddress( 'address_1', e.target.value ) } />
                     <label> { props.address.address_1 === '' ? 'Address 1' : props.address.address_1 } </label>
+                    <small className={`form-text text-muted ${ props.errors.map( e => e.field ).includes('address_1') === true && 'text-danger' }`}>
+                        Address 1 *
+                    </small>
                 </div>
                 <div className="md-form form-sm">
-                    <input type="text" className={`form-control form-control-sm`} />
+                    <input type="text" className={`form-control form-control-sm`} onChange={ e => props.updateStateAddress( 'address_2', e.target.value ) }  />
                     <label> { props.address.address_2 === '' ? 'Address 2' : props.address.address_2 } </label>
+                    <small className={`form-text text-muted ${ props.errors.map( e => e.field ).includes('address_2') === true && 'text-danger' }`}>
+                        Address 2 *
+                    </small>
                 </div>
                 <div className="md-form form-sm">
-                    <input type="text" className={`form-control form-control-sm`} />
+                    <input type="text" className={`form-control form-control-sm`} onChange={ e => props.updateStateAddress( 'city', e.target.value ) } />
                     <label> { props.address.city === '' ? 'City' : props.address.city } </label>
+                    <small className={`form-text text-muted ${ props.errors.map( e => e.field ).includes('city') === true && 'text-danger' }`}>
+                        City *
+                    </small>
                 </div>
                 <div className="md-form form-sm">
-                    <input type="text" className={`form-control form-control-sm`} />
+                    <input type="text" className={`form-control form-control-sm`} onChange={ e => props.updateStateAddress( 'state', e.target.value ) } />
                     <label> { props.address.state === '' ? 'State' : props.address.state } </label>
+                    <small className={`form-text text-muted ${ props.errors.map( e => e.field ).includes('state') === true && 'text-danger' }`}>
+                        State *
+                    </small>
                 </div>
                 <div className="md-form form-sm">
-                    <input type="text" className={`form-control form-control-sm`} />
+                    <input type="text" className={`form-control form-control-sm`} onChange={ e => props.updateStateAddress( 'country', e.target.value ) } />
                     <label> { props.address.country === '' ? 'Country' : props.address.country } </label>
+                    <small className={`form-text text-muted ${ props.errors.map( e => e.field ).includes('country') === true && 'text-danger' }`}>
+                        Country *
+                    </small>
                 </div>
                 <div className="md-form form-sm">
-                    <input type="text" className={`form-control form-control-sm`} />
+                    <input type="text" className={`form-control form-control-sm`} onChange={ e => props.updateStateAddress( 'postalcode', e.target.value ) } />
                     <label> { props.address.postalcode === '' ? 'Postal Code' : props.address.postalcode } </label>
+                    <small className={`form-text text-muted ${ props.errors.map( e => e.field ).includes('postalcode') === true && 'text-danger' }`}>
+                        Postal Code *
+                    </small>
                 </div>
-                <button className="btn btn-primary" onClick={() => { props.updateAddress(); props.stepper.next();}}>Continue</button>
+                <a href="javascript:void(0)" onClick={() => { if ( props.validateAddress() === true ) { props.updateAddress(); props.stepper.next(); }}} className="btn btn-flat btn-white rounded-pill text-danger">Continue</a>
+                {/* <button className="btn btn-primary" onClick={() => { props.updateAddress(); props.stepper.next();}}>Continue</button> */}
               </div>
             <div id="checkout-payment-shipping" className="content text-center">
                 <div className="md-form form-sm">
-                    <input type="text" className={`form-control form-control-sm`} data-inputmask="'mask': '9999 - 9999 - 9999 - 9999'" />
+                    <input type="text" className={`form-control form-control-sm`} value={props.card.number} onChange={ e => { props.updateStateCard( 'number', e.target.value.toString().replace(/ - /g, '') )} } maxLength={32}/>
                     <label> CREDIT CARDT NUMBER </label>
+                    <small className={`form-text text-muted ${ props.errors.map( e => e.field ).includes('number') === true && 'text-danger' }`}>
+                        Credit/Debit Card Number *
+                    </small>
                 </div>
                 <div className="d-flex justify-content-between">
                     <div className="md-form form-sm w-100">
-                        <input type="text" className={`form-control form-control-sm`} data-inputmask="'mask': '9 9 9 9'"/>
+                        <input type="text" className={`form-control form-control-sm`} onChange={ e => {props.updateStateCard( 'cvv', e.target.value.toString().replace(/ /g,'') )} } maxLength={4}/>
                         <label> CVV </label>
+                        <small className={`form-text text-muted ${ props.errors.map( e => e.field ).includes('cvv') === true && 'text-danger' }`}>
+                            Credit/Debit CVV *
+                        </small>
                     </div>
-                    <div className="md-form form-sm w-100">
-                        <input type="text" className={`form-control form-control-sm`} data-inputmask-inputformat="mm / yyyy" data-inputmask-alias="datetime"/>
-                        <label> Expiry </label>
+                    <div className="md-form form-sm w-100 border-0">
+                        <input type="month" className={`form-control form-control-sm card-expiry`}  onChange={ e => {props.updateStateCard( 'expiry', e.target.value )} } maxLength={9} />
+                        <small className={`form-text text-muted ${ props.errors.map( e => e.field ).includes('expiry') === true && 'text-danger' }`}>
+                            Credit/Debit Expiry Date *
+                        </small>
                     </div>
                 </div>
-                <select class="form-control" onChange={ (e) => props.setShipping(e.target.value) }>
+                <h5 className="text-center border-bottom"> Shipping </h5>
+                <select className="md-form form-control" onChange={ (e) => props.setShipping(e.target.value) } onSelect={ (e) => props.setShipping(e.target.value) }>
+                    <option selected value="0">Please select a shipping method </option>
                     { props.config.shipping.map( (r, k) => 
-                        r.shipping_region_id === props.address.shipping_region_id && <option key={k} disabled={k === 0} selected={ k === 0 } value={JSON.stringify(r)}>{ `${r.shipping_type}` } </option>
+                        r.shipping_region_id == props.address.shipping_region_id && <option key={k} value={JSON.stringify(r)}>{ `${r.shipping_type}` } </option>
                     ) }
                 </select>
-                <div className="md-form form-sm">
-                    <input type="text" className={`form-control form-control-sm disabled`} />
-                    <label> { props.config.tax.tax_percentage } </label>
-                </div>
                 <hr/>
                 <div className="md-form form-sm">
                     <input type="text" className={`form-control form-control-sm disabled`} />
@@ -183,6 +211,8 @@ export default props => (
                     <small> Total </small>
                     <h5> &pound; { (props.getTotalPrice() + parseFloat(props.getShippingCost()) + (props.getTotalPrice() * (props.config.tax.tax_percentage / 100)) ).toFixed(2) } </h5>
                 </div>
+                <a href="javascript:void(0)" className="btn btn-flat btn-white rounded-pill text-danger" onClick={ () => { props.placeOrderValidation(); } }>Place Order</a>
+                
               </div>
           </div>
         </div>

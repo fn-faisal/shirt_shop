@@ -11,10 +11,13 @@ import { geocodeByPlaceId } from 'react-google-places-autocomplete';
 import authDispatch from '../../../redux/auth/auth.dispatch';
 import cartDispatch from '../../../redux/cart/cart.dispatch';
 
+import { tError, tSuccess } from '../../dialogs/alert_utils';
+
 class Checkout extends Component {
 
     state = {
         shipping: {},
+        errors: [],
         address: {
             address_1: this.props.auth.profile.address_1 || '',
             address_2: this.props.auth.profile.address_2 || '',
@@ -25,7 +28,29 @@ class Checkout extends Component {
             state: this.props.auth.profile.state || '',
             country: this.props.auth.profile.country || ''
         },
+        card: {
+            number: '',
+            cvv: '',
+            expiry: '',
+        },
         products: [],
+        updateStateAddress: ( field, value ) => this.setState( prev => {
+            let state = {...prev};
+            state.address[field] = value;
+            return state;
+        }),
+        updateStateCard: ( field, value ) => this.setState( prev => {
+            // card number.
+            if ( field === 'number' ) {
+                let chuncks = value.match(/.{1,4}/g);
+                value = chuncks.join(" - ");
+            }
+            console.log(`set ${field} to ${value}`);
+            let state = {...prev};
+            state.card[field] = value;
+            
+            return state;
+        }),
         getShippingCost: () => {
             if ( Object.keys(this.state.shipping).length <= 0 ) return 0;
             return JSON.parse(this.state.shipping).shipping_cost;
@@ -37,6 +62,27 @@ class Checkout extends Component {
             state.address.shipping_region_id = r.shipping_region_id;
             return state;
         } ),
+        validateAddress : () => {
+            let empty = Object.keys(this.state.address).filter( k => this.state.address[k] == '' );
+            if ( empty.length > 0 ) {
+                let errors = empty.map( e => { return {field: e, message: `The field ${e} is required`} } );
+                this.setState({ errors });
+                tError(`The fields '${empty.join(',')}' are required`);
+                return false;
+            }
+            return true;
+        },
+        placeOrderValidation: () => {
+            // credit cart.
+            let empty = Object.keys(this.state.card).filter( k => this.state.card[k] == '' );
+            if ( empty.length > 0 ) {
+                let errors = empty.map( e => { return {field: e, message: `The field ${e} is required`} } );
+                this.setState({ errors });
+                tError(`The fields '${empty.join(',')}' are required`);
+                return false;
+            }
+            return true;
+        },
         setShipping : ( r ) => this.setState( prev => {
             // r = JSON.parse(r);
             let state = { ...prev };

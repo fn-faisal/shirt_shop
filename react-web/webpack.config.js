@@ -45,6 +45,8 @@ module.exports = {
     proxy: {
       '/api': 'http://localhost:8080/*'
     },
+    publicPath: '/',
+    historyApiFallback: true,
   },
   plugins: [
     new Dotenv(),
