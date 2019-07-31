@@ -47,7 +47,7 @@ module.exports.serverErrorCodes = {
 }
 
 module.exports.stripeErrorCodes = {
-    empty : (field) => { return { code: 'STRP_01', message: `The field ${field} is required` } },
+    empty : (field) => { return { code: 'STRP_01', message: `The field ${field} is required` } }
 }
 
 module.exports.orderErrorCodes = {

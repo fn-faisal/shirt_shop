@@ -13,9 +13,9 @@ export const initializers = {
         let payload = await createOrder( token, cart_id, shipping_id, tax_id );
         return dispatch(createAction( ACTIONS.CREATE_ORDER, {order: payload} ));
     },
-    generateToken: (card ) => async ( dispatch ) => {
+    generateToken: ( token, card ) => async ( dispatch ) => {
         // generate token.
-        let token = await generateToken(card);
-        return dispatch( createAction( ACTIONS.GENERATE_TOKEN, { token }  ) ); 
+        let stripeToken = await generateToken( token, card );
+        return dispatch( createAction( ACTIONS.GENERATE_TOKEN, { token: stripeToken }  ) ); 
     }   
 };

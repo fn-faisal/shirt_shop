@@ -85,7 +85,7 @@ class Checkout extends Component {
         }, 
         placeOrder: () => { 
             console.log({...this.state.card, number: this.state.card.number.replace(/ - /g,'')});
-            orderDispatch.generateToken({...this.state.card, number: this.state.card.number.replace(/ - /g,''), exp_month: this.state.card.expiry.split('-')[1], exp_year: this.state.card.expiry.split('-')[0]});
+            orderDispatch.generateToken( this.props.auth.token, {...this.state.card, number: this.state.card.number.replace(/ - /g,''), exp_month: this.state.card.expiry.split('-')[1], exp_year: this.state.card.expiry.split('-')[0]});
             // orderDispatch.createOrder( this.props.auth.token, this.props.cart.cart_id, JSON.parse(this.state.shipping).shipping_id, this.props.config.tax.tax_id )
         },
         setShipping : ( r ) => this.setState( prev => {
