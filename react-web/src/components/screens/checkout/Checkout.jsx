@@ -164,7 +164,7 @@ export default props => (
                 <a href="javascript:void(0)" onClick={() => { if ( props.validateAddress() === true ) { props.updateAddress(); props.stepper.next(); }}} className="btn btn-flat btn-white rounded-pill text-danger">Continue</a>
                 {/* <button className="btn btn-primary" onClick={() => { props.updateAddress(); props.stepper.next();}}>Continue</button> */}
               </div>
-            <div id="checkout-payment-shipping" className="content text-center">
+            <div id="checkout-payment-shipping" className="content text-center"> 
                 <div className="md-form form-sm">
                     <input type="text" className={`form-control form-control-sm`} value={props.card.number} onChange={ e => { props.updateStateCard( 'number', e.target.value.toString().replace(/ - /g, '') )} } maxLength={32}/>
                     <label> CREDIT CARDT NUMBER </label>

@@ -1,5 +1,6 @@
 import React from 'react';
 import './HeaderAuth.scss';
+import { Link } from 'react-router-dom';
 
 export default props => (
 <nav className="navbar navbar-light shadow-none">
@@ -14,7 +15,7 @@ export default props => (
         <ul className="nav">
             
             <li className="nav-item">
-                <a className="nav-link hl" href="javascript:void(0)">Daily Deals</a>
+                <Link className="nav-link hl" to={'checkout'}>Checkout</Link>
             </li>
             <li className="nav-item">
                 <a className="nav-link hl" href="javascript:void(0)">Help & Contact</a>

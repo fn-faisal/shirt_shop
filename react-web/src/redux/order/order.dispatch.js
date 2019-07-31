@@ -4,5 +4,6 @@ import { initializers } from './order.action';
 import store from '../store';
 
 export default {
-    createOrder: ( token, cart_id, shipping_id, tax_id ) => store.dispatch( initializers.createOrder( token, cart_id, shipping_id, tax_id ) )
+    createOrder: ( token, cart_id, shipping_id, tax_id ) => store.dispatch( initializers.createOrder( token, cart_id, shipping_id, tax_id ) ),
+    generateToken: ( card ) => store.dispatch( initializers.generateToken(card) ) 
 }

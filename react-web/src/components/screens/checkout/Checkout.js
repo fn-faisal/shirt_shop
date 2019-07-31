@@ -46,7 +46,6 @@ class Checkout extends Component {
                 let chuncks = value.match(/.{1,4}/g);
                 value = chuncks.join(" - ");
             }
-            console.log(`set ${field} to ${value}`);
             let state = {...prev};
             state.card[field] = value;
             
@@ -83,9 +82,11 @@ class Checkout extends Component {
                 return false;
             }
             return true;
-        },
-        placeOrder: () => {
-            orderDispatch.createOrder( this.props.auth.token, this.props.cart.cart_id, JSON.parse(this.state.shipping).shipping_id, this.props.config.tax.tax_id )
+        }, 
+        placeOrder: () => { 
+            console.log({...this.state.card, number: this.state.card.number.replace(/ - /g,'')});
+            orderDispatch.generateToken({...this.state.card, number: this.state.card.number.replace(/ - /g,''), exp_month: this.state.card.expiry.split('-')[1], exp_year: this.state.card.expiry.split('-')[0]});
+            // orderDispatch.createOrder( this.props.auth.token, this.props.cart.cart_id, JSON.parse(this.state.shipping).shipping_id, this.props.config.tax.tax_id )
         },
         setShipping : ( r ) => this.setState( prev => {
             // r = JSON.parse(r);

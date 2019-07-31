@@ -32,7 +32,6 @@ export const getCart = async ( token, cart_id ) => {
     try {
         let response = await axios.get( `${api}/${ep_cart}/${cart_id}`, { headers: { Authorization: token } } );
         if ( response.status === 200 ) {
-            console.log(response.data);
             return { cart: response.data};
         } else console.log(response);
     } catch ( e ) {
@@ -45,7 +44,6 @@ export const addToCart = async ( token, cart_id, product_id, attributes, quantit
     try {
         let response = await axios.post( `${api}/${ep_cart}/add`, { cart_id, product_id, attributes, quantity },{ headers: { Authorization: token } } );
         if ( response.status === 200 ) {
-            console.log(response.data);
             return response.data;
         } else console.log(response);
     } catch ( e ) {
@@ -58,7 +56,6 @@ export const updateCart = async ( token, item_id, quantity ) => {
     try {
         let response = await axios.put( `${api}/${ep_update}/${item_id}`, { quantity },{ headers: { Authorization: token } } );
         if ( response.status === 200 ) {
-            console.log(response.data);
             return response.data;
         } else console.log(response);
     } catch ( e ) {
@@ -71,7 +68,6 @@ export const removeCartItem = async ( token, item_id ) => {
     try {
         let response = await axios.delete( `${api}/${ep_remove_product}/${item_id}`,{ headers: { Authorization: token } } );
         if ( response.status === 200 ) {
-            console.log(response.data);
             return response.data;
         } else console.log(response);
     } catch ( e ) {
