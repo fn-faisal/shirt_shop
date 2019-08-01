@@ -12,7 +12,7 @@ class FilterSide extends Component {
         curMaxValue: this.props.config.max_value || 0,
         curMinValue: 1, 
         updateFilter : ( data ) => dispatch.updateFilter( data ),
-        updateDepartmentFilter: ( departmentName, departmenId,  add ) => {
+        updateDepartmentFilter: ( departmentName, departmentId,  add ) => {
             let departments = this.props.filter.departments ? this.props.filter.departments : '';
             let departmentIds = this.props.filter.department_ids ? this.props.filter.department_ids : '';
             let departmentsArray = departments.length > 0 ? departments.split(',') : [];
@@ -20,12 +20,12 @@ class FilterSide extends Component {
             // add to array.
             if ( !departmentsArray.includes(departmentName) && add === true ) {
                 departmentsArray.push( departmentName );
-                departmentIdsArray.push( departmenId );
+                departmentIdsArray.push( departmentId );
             }
             // remove from array.
             if ( departmentsArray.includes(departmentName) && add === false ) {
                 departmentsArray = departmentsArray.filter( d => d !== departmentName );
-                departmentIdsArray = departmentIdsArray.filter( d => d !== departmenId );
+                departmentIdsArray = departmentIdsArray.filter( d => d != departmentId );
             }
             this.state.updateFilter({ departments: departmentsArray.length > 0 ? departmentsArray.join(',') : undefined, department_ids: departmentIdsArray.length > 0 ? departmentIdsArray.join(',') : undefined })
         },

@@ -1,13 +1,15 @@
 import React from 'react';
 import './Header.scss';
 
+import { Link } from 'react-router-dom';
+
 import Cart from '../../cart/Cart';
 
 export default props => (
     <nav className="nav navbar navbar-light shadow-sm bg-secondary">
         <div className="header-auth">
             <div className="header-brand">
-                <h4 className="accent title">SHOPMATE</h4>
+                <h4 className="accent title"><Link to="/">SHOPMATE</Link> </h4>
             </div>
         </div>
         {/* <div className="header-links">

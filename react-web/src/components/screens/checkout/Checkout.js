@@ -29,6 +29,7 @@ class Checkout extends Component {
             state: this.props.auth.profile.state || '',
             country: this.props.auth.profile.country || ''
         },
+        // for display purposes.
         card: {
             number: '',
             cvv: '',
@@ -49,6 +50,8 @@ class Checkout extends Component {
             let state = {...prev};
             state.card[field] = value;
             
+            // update card in store.
+            orderDispatch.setCard( { ...state.card, number: state.card.number.replace(/ - /g, ''), exp_month: state.card.expiry !== '' ? state.card.expiry.split('-')[1] : '', exp_year: state.card.expiry !== '' ? state.card.expiry.split('-')[0] : '' } )
             return state;
         }),
         getShippingCost: () => {
@@ -73,6 +76,7 @@ class Checkout extends Component {
             return true;
         },
         placeOrderValidation: () => {
+            console.log(this.state.shipping);
             // credit cart.
             let empty = Object.keys(this.state.card).filter( k => this.state.card[k] == '' );
             if ( empty.length > 0 ) {
@@ -81,12 +85,16 @@ class Checkout extends Component {
                 tError(`The fields '${empty.join(',')}' are required`);
                 return false;
             }
+            // shipping.
+            if ( Object.keys(this.state.shipping).length == 0 ) {
+                this.setState({ field: 'shipping', message: `Please select a shipping method` })
+                tError(`Please select a shipping method`);
+                return false;
+            }
             return true;
         }, 
         placeOrder: () => { 
-            console.log({...this.state.card, number: this.state.card.number.replace(/ - /g,'')});
-            orderDispatch.generateToken( this.props.auth.token, {...this.state.card, number: this.state.card.number.replace(/ - /g,''), exp_month: this.state.card.expiry.split('-')[1], exp_year: this.state.card.expiry.split('-')[0]});
-            // orderDispatch.createOrder( this.props.auth.token, this.props.cart.cart_id, JSON.parse(this.state.shipping).shipping_id, this.props.config.tax.tax_id )
+            orderDispatch.createOrder( this.props.auth.token, this.props.cart.cart_id, JSON.parse(this.state.shipping).shipping_id, this.props.config.tax.tax_id )
         },
         setShipping : ( r ) => this.setState( prev => {
             // r = JSON.parse(r);
@@ -136,6 +144,9 @@ class Checkout extends Component {
             });
             return total;
         },
+        getOrderTotal: () => 
+            (this.state.getTotalPrice() + parseFloat(this.state.getShippingCost()) + (this.state.getTotalPrice() * (this.props.config.tax.tax_percentage / 100)) ).toFixed(2)
+        ,
         updateAddress : () => {
             authDispatch.updateUser( this.props.auth.token, {...this.state.address, name: this.props.auth.profile.name, email: this.props.auth.profile.email } );
         },
@@ -165,7 +176,6 @@ class Checkout extends Component {
     }
 
     componentDidMount = () => {
-        $(":input").inputmask();
         this.stepper = new Stepper(document.querySelector('#stepper1'), {
             linear: false,
             animation: true
@@ -175,6 +185,18 @@ class Checkout extends Component {
     componentWillUpdate = () => {
         if ( this.props.cart.refresh === true ) {
             this.state.updateCart();
+        }
+    }
+
+    componentDidUpdate = () => {
+        // get token.
+        if ( this.props.order.getToken === true ) {
+            // generate token.
+            orderDispatch.generateToken( this.props.auth.token, {...this.props.order.card});
+        }
+        // make payment.
+        else if ( this.props.order.makePayment === true ) {
+            orderDispatch.makePayment( this.props.auth.token, this.props.order.order_id, this.props.order.token, 'Test', this.state.getOrderTotal() );
         }
     }
 

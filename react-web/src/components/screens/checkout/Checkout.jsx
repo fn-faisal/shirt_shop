@@ -14,16 +14,23 @@ export default props => (
               </button>
             </div>
             <div className="line"></div>
-            <div className="step" data-target="#checkout-address">
+            <div className="step" data-target="#checkout-instructions">
               <button className="step-trigger">
                 <span className="bs-stepper-circle">2</span>
+                <span className="bs-stepper-label">Notes/Instruction</span>
+              </button>
+            </div>
+            <div className="line"></div>
+            <div className="step" data-target="#checkout-address">
+              <button className="step-trigger">
+                <span className="bs-stepper-circle">3</span>
                 <span className="bs-stepper-label">Delivery Address</span>
               </button>
             </div>
             <div className="line"></div>
             <div className="step" data-target="#checkout-payment-shipping">
               <button className="step-trigger">
-                <span className="bs-stepper-circle">3</span>
+                <span className="bs-stepper-circle">4</span>
                 <span className="bs-stepper-label">Payment & Shipping</span>
               </button>
             </div>
@@ -93,32 +100,23 @@ export default props => (
                             <td className="text-left" colSpan="2">
                                 <a href="javascript:void(0)" onClick={ () => props.stepper.next() } className="btn btn-flat btn-white rounded-pill text-danger">Continue</a>
                             </td>
-                            
                         </tr>
                     </tfoot>
                 </table>
             </div>
-                {/* <div className="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" />
+            </div>
+            <div id="checkout-instructions" className="content">
+                <div className="md-form form-sm">
+                    <textarea onChange={ e => {} } rows={2} className={`form-control form-control-sm md-textarea`} ></textarea>
+                    <label> Notes/Instructions </label>
                 </div>
-                <button className="btn btn-primary" onClick={() => props.stepper.next()}>Next</button> */}
+                <a href="javascript:void(0)" onClick={ () => props.stepper.next() } className="btn btn-flat btn-white rounded-pill text-danger">Continue</a>
             </div>
             <div id="checkout-address" className="content">
                 <GooglePlacesAutocomplete
                   onSelect={ props.updatePlace }
                 />
                 
-                <div className="md-form form-sm">
-                    <select className="form-control" onChange={ e => props.setRegion(e.target.value) }>
-                        { props.config.shipping_regions.map( (r, k) => 
-                            ( <option key={k} disabled={k === 0} value={JSON.stringify(r)}>{ r.shipping_region }</option>)
-                        ) }
-                    </select>
-                    <small className={`form-text text-muted ${ props.errors.map( e => e.field ).includes('region') === true && 'text-danger' }`}>
-                        Please Select A Shipping Region *
-                    </small>
-                </div>
                 <div className="md-form form-sm">
                     <input type="text" className={`form-control form-control-sm`} onChange={ e => props.updateStateAddress( 'address_1', e.target.value ) } />
                     <label> { props.address.address_1 === '' ? 'Address 1' : props.address.address_1 } </label>
@@ -166,7 +164,7 @@ export default props => (
               </div>
             <div id="checkout-payment-shipping" className="content text-center"> 
                 <div className="md-form form-sm">
-                    <input type="text" className={`form-control form-control-sm`} value={props.card.number} onChange={ e => { props.updateStateCard( 'number', e.target.value.toString().replace(/ - /g, '') )} } maxLength={32}/>
+                    <input type="text" className={`form-control form-control-sm`} value={props.card.number} onChange={ e => { props.updateStateCard( 'number', e.target.value.toString().replace(/ - /g, '') )} } maxLength={25}/>
                     <label> CREDIT CARDT NUMBER </label>
                     <small className={`form-text text-muted ${ props.errors.map( e => e.field ).includes('number') === true && 'text-danger' }`}>
                         Credit/Debit Card Number *
@@ -188,13 +186,28 @@ export default props => (
                     </div>
                 </div>
                 <h5 className="text-center border-bottom"> Shipping </h5>
-                <select className="md-form form-control" onChange={ (e) => props.setShipping(e.target.value) } onSelect={ (e) => props.setShipping(e.target.value) }>
-                    <option selected value="0">Please select a shipping method </option>
-                    { props.config.shipping.map( (r, k) => 
-                        r.shipping_region_id == props.address.shipping_region_id && <option key={k} value={JSON.stringify(r)}>{ `${r.shipping_type}` } </option>
-                    ) }
-                </select>
-                <hr/>
+                <div className="md-form form-sm">
+                    <select className="form-control" onChange={ e => props.setRegion(e.target.value) }>
+                        { props.config.shipping_regions.map( (r, k) => 
+                            ( <option key={k} disabled={k === 0} selected={ k === 0 } value={JSON.stringify(r)}>{ r.shipping_region }</option>)
+                        ) }
+                    </select>
+                    <small className={`form-text text-muted ${ props.errors.map( e => e.field ).includes('shipping') === true && 'text-danger' }`}>
+                        Please Select A Shipping Region *
+                    </small>
+                </div>
+                <div className="md-form form-sm">
+                    <select className="form-control" onChange={ (e) => props.setShipping(e.target.value) } onSelect={ (e) => props.setShipping(e.target.value) }>
+                        <option selected value="0">Please select a shipping method </option>
+                        { props.config.shipping.map( (r, k) => 
+                            r.shipping_region_id == props.address.shipping_region_id && <option key={k} value={JSON.stringify(r)}>{ `${r.shipping_type}` } </option>
+                        ) }
+                    </select>
+                    <small className={`form-text text-muted ${ props.errors.map( e => e.field ).includes('shipping') === true && 'text-danger' }`}>
+                        Please Select A Shipping Method *
+                    </small>
+                </div>
+                <span className="my-2"></span>
                 <div className="md-form form-sm">
                     <input type="text" className={`form-control form-control-sm disabled`} />
                     <label> SUBTOTAL : &pound; {props.getTotalPrice()} </label>

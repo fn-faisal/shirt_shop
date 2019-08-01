@@ -30,3 +30,16 @@ export const generateToken = async ( token, card ) => {
         return { errors: [{ error: 'An error occurred' }] };
     }
 }
+
+export const makePayment = async ( token, order_id, stripeToken, description, amount ) => {
+    try {
+        let response = await axios.post( `${api}/${ep_stripe}`, {order_id, stripeToken, description, amount}, { headers: { Authorization: token } });
+        if ( response.status === 200 ) {
+            console.log(response.data);
+            return response.data;
+        } else console.error(response);
+    } catch( e ) {
+        console.error(e);
+        return { errors: [{ error: 'An error occurred' }] };
+    }
+}

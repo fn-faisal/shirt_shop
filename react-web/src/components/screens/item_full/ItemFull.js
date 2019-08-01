@@ -10,9 +10,9 @@ import view from './ItemFull.jsx';
 class ItemFull extends Component {
     state = {
         image: '', 
-        quantity: 0,
+        quantity: 1,
         incQuantity : () => this.setState({ quantity: ++this.state.quantity }),
-        decQuantity : () => this.setState({ quantity: this.state.quantity !== 0 ? --this.state.quantity : 0 }),
+        decQuantity : () => this.setState({ quantity: this.state.quantity !== 1 ? --this.state.quantity : 1 }),
         updateImage: ( val ) => this.setState({ image: val }),
         imageRef: (img) => `${process.env.API_HOST}:${process.env.API_PORT}/img/products/${img}`,
         updateFilter : ( data ) => filterDispatch.updateFilter( data ),

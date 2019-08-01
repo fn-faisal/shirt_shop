@@ -37,7 +37,8 @@ module.exports.placeOrder = async (req, res) => {
             customer_id: req.customer.customer_id,
             reference: reference,
             shipping_id: shipping.shipping_id,
-            tax: tax.tax_id
+            tax: tax.tax_id,
+            status: 'processing_order'
         });
 
         cartItems.map( async (item) => {

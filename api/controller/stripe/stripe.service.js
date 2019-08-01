@@ -1,14 +1,20 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET);
 const { serverErrorCodes: { misc } } = require('../../utils');
+const { Orders } = require('../../model/schema');
 
-module.exports.chargeCustomer =  ( req, res ) => 
+module.exports.chargeCustomer =  ( { body: { amount, currency, stripeToken, order_id, description } } = req, res ) => 
     stripe.charges.create({
-        amount: req.body.amount,
-        currency: req.body.currency || 'USD',
-        source: req.body.stripeToken,
-        metadata: { order_id: req.body.order_id, description: req.body.description }
+        amount: amount * 100,
+        currency: currency || 'USD',
+        source: stripeToken,
+        metadata: { order_id: order_id+'', description }
     })
-    .then ( charge => res.json(charge) )
+    .then ( charge => {
+        // update order status.
+        Orders.findOne({ where: { order_id } })
+        .then( order => order.update({ status: 'payment_processed' }) )
+        return res.json(charge)
+    })
     .catch( err => { console.error(err); res.json(misc()) } )
 
 module.exports.generateToken = ( { body: { number, cvv, exp_month, exp_year } } = req, res ) =>

@@ -27,13 +27,13 @@ export default props => (
            <div className="item-full-content w-100">
                <div className="itf-bread-crumbs">
                    <p className="d-flex align-items-center">
-                       <a href="#" className="text-muted mb-1"><small>Home</small></a>
+                       <a href="javascript:void(0)" className="text-muted mb-1"><small>Home</small></a>
                        <i className="fa fa-chevron-right text-muted btn-sm"></i>
-                       { Object.keys(props.product.single).length === 0 && (<a href="#" className="active mb-1 shine"><small className="line px-5"></small></a>)}
-                        { Object.keys(props.product.single).length > 0 && (<a href="#" className="text-muted mb-1"><small>{ props.config.departments.filter( d => d.department_id === props.product.single.category.department_id ).pop().name }</small></a>)}
+                       { Object.keys(props.product.single).length === 0 && (<a href="javascript:void(0)" className="active mb-1 shine"><small className="line px-5"></small></a>)}
+                        { Object.keys(props.product.single).length > 0 && (<a href="javascript:void(0)" className="text-muted mb-1"><small>{ props.config.departments.filter( d => d.department_id === props.product.single.category.department_id ).pop().name }</small></a>)}
                        <i className="fa fa-chevron-right text-muted btn-sm"></i>
-                        { Object.keys(props.product.single).length === 0 && (<a href="#" className="active mb-1 shine"><small className="line px-5"></small></a>)}
-                        { Object.keys(props.product.single).length > 0 && (<a href="#" className="active mb-1">{ props.product.single.category.name }</a>)}
+                        { Object.keys(props.product.single).length === 0 && (<a href="javascript:void(0)" className="active mb-1 shine"><small className="line px-5"></small></a>)}
+                        { Object.keys(props.product.single).length > 0 && (<a href="javascript:void(0)" className="active mb-1">{ props.product.single.category.name }</a>)}
                    </p>
                </div>
                <hr/>
@@ -50,8 +50,8 @@ export default props => (
                <h5 className="itf-price">
                    { Object.keys(props.product.single).length > 0 ? 
                     (   <div>
-                            <span className={ props.product.single.discounted_price > 0 && `text-danger text-cut`}> &#163;{ props.product.single.price } </span>
-                            { props.product.single.discounted_price > 0 && (<span>  &#163;{ props.product.single.discounted_price } </span>) }
+                            <span className={ props.product.single.discounted_price > 0 && `text-danger text-cut`}> &pound;{ props.product.single.price } </span>
+                            { props.product.single.discounted_price > 0 && (<span>  &pound;{ props.product.single.discounted_price } </span>) }
                         </div>
                      )
                     :
@@ -69,14 +69,14 @@ export default props => (
                     )
                 }
                <hr/>
-               <h5 className="card-title text-muted mt-4 d-flex justify-content-between">Size <a href="#" className="text-muted mr-5"><small>SIZE GUIDE</small></a></h5>
+               <h5 className="card-title text-muted mt-4 d-flex justify-content-between">Size <a href="javascript:void(0)" className="text-muted mr-5"><small>SIZE GUIDE</small></a></h5>
                { Object.keys(props.product.single).length === 0 && (<h5 className="itf-price"><span className="py-3 shine w-75"></span></h5>)}
                { Object.keys(props.product.single).length > 0 && 
                     (
                         <ul className="nav nav-pills filter-size">
                             { props.product.single.sizes.map( (size, k) => 
                                 <li key={k} className="nav-item" onLoad={ () => console.log(`Loaded ${size.value} size`) } onClick={ () => props.updateFilter({ size: size.value, size_id: size.attribute_value_id }) } >
-                                    <a className={`filter-size-btn nav-link text-white m-2 filter-size-item ${ props.filter.size === size.value ? 'active' : '' }`} href="#">{size.value}</a>
+                                    <a className={`filter-size-btn nav-link text-white m-2 filter-size-item ${ props.filter.size === size.value ? 'active' : '' }`} href="javascript:void(0)">{size.value}</a>
                                 </li>
                             )}
                         </ul>
@@ -84,19 +84,19 @@ export default props => (
                 }
                {/* <ul className="nav nav-pills filter-size">
                    <li className="nav-item">
-                       <a className="filter-size-btn nav-link text-white m-2 filter-size-item" href="#">XS</a>
+                       <a className="filter-size-btn nav-link text-white m-2 filter-size-item" href="javascript:void(0)">XS</a>
                    </li>
                    <li className="nav-item">
-                       <a className="filter-size-btn nav-link active m-2 filter-size-item" href="#">S</a>
+                       <a className="filter-size-btn nav-link active m-2 filter-size-item" href="javascript:void(0)">S</a>
                    </li>
                    <li className="nav-item">
-                       <a className="filter-size-btn nav-link text-white m-2 filter-size-item" href="#">M</a>
+                       <a className="filter-size-btn nav-link text-white m-2 filter-size-item" href="javascript:void(0)">M</a>
                    </li>
                    <li className="nav-item">
-                       <a className="filter-size-btn nav-link text-white m-2 filter-size-item" href="#">L</a>
+                       <a className="filter-size-btn nav-link text-white m-2 filter-size-item" href="javascript:void(0)">L</a>
                    </li>
                    <li className="nav-item">
-                       <a className="filter-size-btn nav-link text-white m-2 filter-size-item" href="#">XL</a>
+                       <a className="filter-size-btn nav-link text-white m-2 filter-size-item" href="javascript:void(0)">XL</a>
                    </li>
                </ul> */}
                <hr/>
@@ -114,7 +114,7 @@ export default props => (
                </div>
                <div className="itf-actions d-flex justify-content-around mt-4">
                    <a href="javascript:void(0)" id="addToCartBtn" className="btn btn-flat btn-danger rounded-pill" onClick={ () => props.addToCart() }>Add To Cart</a>
-                   <a href="#" className="btn btn-flat btn-transparent rounded-pill shadow-none"> <i className="fa fa-heart text-light mr-2"></i> Add to wishlist</a>
+                   <a href="javascript:void(0)" className="btn btn-flat btn-transparent rounded-pill shadow-none"> <i className="fa fa-heart text-light mr-2"></i> Add to wishlist</a>
                </div>
            </div>
        </div>
@@ -156,7 +156,7 @@ export default props => (
            <hr/>
            <div className="itf-review-form pt-4">
                <h4 className="ml-5 mt-4">Add a review</h4>
-               <form className="text-center ml-5 mt-4" style={{ color: '#757575' }} action="#">
+               <form className="text-center ml-5 mt-4" style={{ color: 'javascript:void(0)757575' }} action="javascript:void(0)">
                    <div className="md-form mt-0">
                        <input type="text" id="itfNickName" className="form-control"/>
                        <label >Choose a nickname</label>
@@ -166,7 +166,7 @@ export default props => (
                        <textarea type="textarea" id="itfReview" className="form-control md-textarea"></textarea>
                        <label >Your review</label>
                        <small id="itfReviewHelpBlock" className="form-text text-muted mb-4">
-                           Your review must be at leat 50 characters. <a className="text-danger" href="#">FULL REVIEW GUIDLINES</a>
+                           Your review must be at leat 50 characters. <a className="text-danger" href="javascript:void(0)">FULL REVIEW GUIDLINES</a>
                        </small>
                    </div>
 
@@ -197,20 +197,20 @@ export default props => (
                <div className="well">
                    <div className="card item-card booking-card m-4" style={{ width: '100%' }}>
                        <div className="view overlay d-flex flex-column">
-                           <a href="#" className="item-trending-label btn btn-flat btn-danger">HOT</a>
+                           <a href="javascript:void(0)" className="item-trending-label btn btn-flat btn-danger">HOT</a>
                            <img className="item-card-img p-4" src="./img/images-shirt17.png" alt="Card image cap"/>
-                           <a href="#">
+                           <a href="javascript:void(0)">
                                <div className="mask rgba-white-slight"></div>
                            </a>
                        </div>
                        
                        <div className="card-body d-flex flex-column align-items-center">
                            <h5 className="card-title text-center pt-4 font-weight-bold"><a>New Look T-Shirt In Gradient Fade</a></h5>
-                           <span className="text-danger"> &#163; 14.99 </span>
+                           <span className="text-danger"> &javascript:void(0)163; 14.99 </span>
                        </div>
                        <div className="item-card-top ict-quickview">
-                           <a href="#" className="fa fa-heart text-danger bg-transparent"></a> <br/>
-                           <a href="#" className="btn btn-flat btn-danger rounded-pill">Quick view</a>
+                           <a href="javascript:void(0)" className="fa fa-heart text-danger bg-transparent"></a> <br/>
+                           <a href="javascript:void(0)" className="btn btn-flat btn-danger rounded-pill">Quick view</a>
                        </div>
                    </div>
                </div>
@@ -220,14 +220,14 @@ export default props => (
                     <div className="card item-card booking-card m-4" style={{ width: '100%' }}>
                        <div className="view overlay d-flex flex-column">
                            <img className="item-card-img p-4" src="./img/images-shirt16.png" alt="Card image cap"/>
-                           <a href="#!">
+                           <a href="javascript:void(0)!">
                                <div className="mask rgba-white-slight"></div>
                            </a>
                        </div>
                        
                        <div className="card-body d-flex flex-column align-items-center">
                            <h5 className="card-title font-weight-bold"><a>Men's Knitwear Offers</a></h5>
-                           <a href="#" className="btn btn-flat btn-danger rounded-pill">Buy now</a>
+                           <a href="javascript:void(0)" className="btn btn-flat btn-danger rounded-pill">Buy now</a>
                        </div>
                    </div>
                </div>
@@ -237,14 +237,14 @@ export default props => (
                     <div className="card item-card booking-card m-4" style={{ width: '100%' }}>
                        <div className="view overlay d-flex flex-column">
                            <img className="item-card-img p-4" src="./img/images-shirt15.png" alt="Card image cap"/>
-                           <a href="#!">
+                           <a href="javascript:void(0)!">
                                <div className="mask rgba-white-slight"></div>
                            </a>
                        </div>
                        
                        <div className="card-body d-flex flex-column align-items-center">
                            <h5 className="card-title font-weight-bold"><a>Men's Teashirts</a></h5>
-                           <span> &#163; 14.99 </span>
+                           <span> &javascript:void(0)163; 14.99 </span>
                            <div className="d-flex justify-conten-between my-3">
                                <span className="filter-color filter-color-active badge mr-2 shadow-none rounded-circle p-1" style={{ width: '20px', backgroundColor: 'cyan' }}>  </span>
                                <span className="filter-color badge mx-2 shadow-none rounded-circle p-1" style={{ width: '20px', height: '20px', backgroundColor: 'green' }}>  </span>
@@ -252,8 +252,8 @@ export default props => (
                            </div>
                        </div>
                        <div className="item-card-top ict-quickview">
-                           <a href="#" className="fa fa-heart text-danger bg-transparent"></a> <br/>
-                           <a href="#" className="btn btn-flat btn-danger rounded-pill">Quick view</a>
+                           <a href="javascript:void(0)" className="fa fa-heart text-danger bg-transparent"></a> <br/>
+                           <a href="javascript:void(0)" className="btn btn-flat btn-danger rounded-pill">Quick view</a>
                        </div>
                    </div>
                </div>
@@ -264,17 +264,17 @@ export default props => (
                        <div className="view overlay d-flex flex-column">
                            <h5 className="card-title text-center pt-4 font-weight-bold"><a>Men's Shirt Offers</a></h5>
                            <img className="item-card-img p-4" src="./img/images-shirt14.png" alt="Card image cap"/>
-                           <a href="#!">
+                           <a href="javascript:void(0)!">
                                <div className="mask rgba-white-slight"></div>
                            </a>
                        </div>
                        
                        <div className="card-body d-flex flex-column align-items-center">
-                           <span className="text-danger"> From &#163; 14.99 </span>
+                           <span className="text-danger"> From &javascript:void(0)163; 14.99 </span>
                        </div>
                        <div className="item-card-top ict-quickview">
-                           <a href="#" className="fa fa-heart text-danger bg-transparent"></a> <br/>
-                           <a href="#" className="btn btn-flat btn-danger rounded-pill">Quick view</a>
+                           <a href="javascript:void(0)" className="fa fa-heart text-danger bg-transparent"></a> <br/>
+                           <a href="javascript:void(0)" className="btn btn-flat btn-danger rounded-pill">Quick view</a>
                        </div>
                    </div>
                </div>
@@ -285,17 +285,17 @@ export default props => (
                        <div className="view overlay d-flex flex-column">
                            <h5 className="card-title text-center pt-4 font-weight-bold"><a>Men's Shirt Offers</a></h5>
                            <img className="item-card-img p-4" src="./img/images-shirt14.png" alt="Card image cap"/>
-                           <a href="#!">
+                           <a href="javascript:void(0)!">
                                <div className="mask rgba-white-slight"></div>
                            </a>
                        </div>
                        
                        <div className="card-body d-flex flex-column align-items-center">
-                           <span className="text-danger"> From &#163; 14.99 </span>
+                           <span className="text-danger"> From &javascript:void(0)163; 14.99 </span>
                        </div>
                        <div className="item-card-top ict-quickview">
-                           <a href="#" className="fa fa-heart text-danger bg-transparent"></a> <br/>
-                           <a href="#" className="btn btn-flat btn-danger rounded-pill">Quick view</a>
+                           <a href="javascript:void(0)" className="fa fa-heart text-danger bg-transparent"></a> <br/>
+                           <a href="javascript:void(0)" className="btn btn-flat btn-danger rounded-pill">Quick view</a>
                        </div>
                    </div>
                </div>

@@ -61,7 +61,10 @@ class Cart extends Component {
         if ( this.props.auth.token && !this.props.cart.cart_id ) {
             dispatch.initCart(this.props.auth.token);
         }
-        else if ( this.props.cart.refresh === true ) {
+    }
+
+    componentDidUpdate = () => {
+        if ( this.props.cart.refresh === true ) {
             this.state.updateCart();
         }
     }

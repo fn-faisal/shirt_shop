@@ -8,7 +8,9 @@ export default props => (
         <a href="javascript:void(0)" className="cart-btn mx-4 bg-transparent text-dark dropdown-toggle" 
         onClick={ () => props.toggleCart() }
         aria-haspopup="true" aria-expanded="false" >
-            <img src="/assets/img/icons-bag.png"/><span className="badge rounded-circle badge-danger position-absolute header-cart-count">{ props.cart.cart.length }</span>
+            <img src="/assets/img/icons-bag.png"/>
+            { props.cart.cart.length > 0 &&
+            <span className="badge rounded-circle badge-danger position-absolute header-cart-count">{ props.cart.cart.length }</span> }
         </a>
         <div className="cart-dropdown mt-3 dropdown-menu dropdown-menu-right">
             <div className="cart-title mx-3 d-flex justify-content-between align-items-center">

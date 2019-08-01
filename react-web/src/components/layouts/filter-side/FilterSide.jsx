@@ -6,7 +6,7 @@ export default props => (
         <div className="card bg-transparent norder-0 shadow-sm mt-3">
             <div className="card-header border-0">
                 <span>
-                        Filter 468 items
+                        Filter Items
                 </span>
             </div>
             <div className="card-body">

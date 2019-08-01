@@ -5,7 +5,7 @@ export default props => (
     <div className="top-controls card mt-5 d-flex justify-content-between">
         <div className="filter d-flex flex-row p-3 align-items-center">
             <h4>Filter</h4>
-            <div className="dropdown mx-3">
+            <div className="dropdown mx-3 text-center">
                 <h6 className="pt-1 dropdown-toggle" data-toggle="dropdown">Category { props.filter.category && <small>{ ` : ${props.filter.category}` }</small> }</h6>
                 <div className="dropdown-menu dropdown-primary mt-2">
                     { props.config.categories.map( (category, key) => <a key={key} onClick={ () => props.updateFilter({ category: category.name, category_id: category.category_id }) } className="dropdown-item" href="javascrip:void(0)">{category.name}</a> ) }
@@ -25,15 +25,8 @@ export default props => (
             </div>
 
         </div>
-        <div className="sort d-flex p-3 justify-content-center">
-            <h4>Sort</h4>
-            <div className="dropdown mx-3">
-                <h6 className="pt-1 dropdown-toggle" data-toggle="dropdown">Most relevent</h6>
-                <div className="dropdown-menu dropdown-primary">
-                    <a className="dropdown-item" href="#">Top rated</a>
-                    <a className="dropdown-item" href="#">Hot</a>
-                </div>
-            </div>
+        <div className="sort d-flex flex-row p-3 align-items-center">
+            <h6 className="mx-2">Showing <small>{ props.product.count }</small> Products</h6>
         </div>
     </div>
 )

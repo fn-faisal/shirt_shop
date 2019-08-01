@@ -7,6 +7,7 @@ import { Provider, connect } from 'react-redux';
 import store from './redux/store';
 import authDispatch from './redux/auth/auth.dispatch';
 import configDispatch from './redux/config/config.dispatch';
+import orderDispatch from './redux/order/order.dispatch';
 
 const mapStateToProps = state => state;
 
@@ -44,7 +45,7 @@ import AuthDia from './components/dialogs/auth/AuthDia';
 
 class Index extends Component {
 
-    componentWillMount = () => {
+    componentWillMount () {
         authDispatch.load(); 
         configDispatch.loadConfig();
     }
