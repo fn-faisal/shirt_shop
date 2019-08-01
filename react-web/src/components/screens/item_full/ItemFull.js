@@ -5,6 +5,8 @@ import productDispatch from '../../../redux/product/product.dispatch';
 import filterDispatch from '../../../redux/filter/filter.dispatch';
 import cartDispatch from '../../../redux/cart/cart.dispatch';
 
+import { tError } from '../../dialogs/alert_utils';
+
 import view from './ItemFull.jsx';
 
 class ItemFull extends Component {
@@ -18,8 +20,15 @@ class ItemFull extends Component {
         updateFilter : ( data ) => filterDispatch.updateFilter( data ),
         clearFilter : () => filterDispatch.clearFilter(),
         addToCart : () => {
-            if ( !this.props.filter.color || !this.props.filter.size )
-                alert('Please select a size and a color');
+            document.querySelector('#addToCartBtn').classList.add("shine-once");
+            setTimeout( () => {
+                document.querySelector('#addToCartBtn').classList.add("shine-once");
+            }, 1000 );
+
+            if ( !this.props.filter.color || !this.props.filter.size ) {
+                tError('Please select a size and a color');
+                return;
+            }
             let attributes = `${this.props.filter.size} ${this.props.filter.color}`;
             cartDispatch.addToCart( this.props.auth.token, this.props.cart.cart_id ,this.props.product.single.product_id, attributes, this.state.quantity );
         }

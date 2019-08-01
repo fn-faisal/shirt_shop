@@ -113,15 +113,15 @@ export default props => (
                    </button>
                </div>
                <div className="itf-actions d-flex justify-content-around mt-4">
-                   <a href="javascript:void(0)" id="addToCartBtn" className="btn btn-flat btn-danger rounded-pill" onClick={ () => props.addToCart() }>Add To Cart</a>
+                   <a href="javascript:void(0)" id="addToCartBtn" className={`btn btn-flat btn-danger rounded-pill`} onClick={ () => props.addToCart() }> <i className="fa fa-shopping-cart text-light mr-2"></i> Add To Cart</a>
                    <a href="javascript:void(0)" className="btn btn-flat btn-transparent rounded-pill shadow-none"> <i className="fa fa-heart text-light mr-2"></i> Add to wishlist</a>
                </div>
            </div>
        </div>
-       <div className="card-footer">
+       {/* <div className="card-footer">
            <h4 className="ml-5 mt-4">Product reviews</h4>
            <h4 className="w-100 py-5 shine text-center"></h4>
-           {/* <div className="itf-review-container ml-5 mt-5">
+           <div className="itf-review-container ml-5 mt-5">
                <div className="itf-review d-flex justify-content-around">
                    <div className="itf-review-left">
                        <div className="itf-rating">
@@ -152,7 +152,7 @@ export default props => (
                        </div>
                    </div>
                </div>
-           </div> */}
+           </div> 
            <hr/>
            <div className="itf-review-form pt-4">
                <h4 className="ml-5 mt-4">Add a review</h4>
@@ -187,7 +187,7 @@ export default props => (
                </form>
                    
            </div>
-       </div>
+       </div> */}
    </div>
 
    {/* <div className="recommendations">
