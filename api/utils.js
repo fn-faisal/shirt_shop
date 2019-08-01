@@ -24,7 +24,8 @@ module.exports.userErrorCodes = {
 }
 
 module.exports.productErrorCodes = {
-    notfound: ( field ) => { return { code: 'PRD_01', message: `The ${field} doesn't exist.` } }
+    notfound: ( field ) => { return { code: 'PRD_01', message: `The ${field} doesn't exist.` } },
+    empty : (field) => { return { code: 'PRD_02', message: `The field ${field} is required` } }
 }
 
 module.exports.queryErrorCodes = {

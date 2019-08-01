@@ -14,7 +14,7 @@ export default props => (
     <div className="header-links">
         <ul className="nav">
             
-            { Object.keys(props.auth.profile).length && props.cart.cart.length > 0 && <li className="nav-item">
+            { Object.keys(props.auth.profile).length > 0 && (props.cart.cart.length > 0) && <li className="nav-item">
                 <Link className="nav-link hl" to={'/checkout'}>Checkout</Link>
             </li> }
             <li className="nav-item">

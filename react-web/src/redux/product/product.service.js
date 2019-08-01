@@ -2,6 +2,7 @@ import axios from 'axios';
 import { api } from '../utils';
 
 const ep_products = 'products';
+const ep_search = `${ep_products}/search`;
 
 export const getProducts = async ( page, filter = {} ) => {
     try { 
@@ -27,4 +28,17 @@ export const getProduct = async ( id ) => {
         console.error(e);
         return { errors: [{ error: 'An error occurred' }] };
     }
+}
+
+export const searchProducts = async ( query_string, page ) => {
+    try { 
+        let response = await axios.get( `${api}/${ep_search}?limit=5&page=${page}&query_string=${query_string}`);
+        if ( response.status === 200 ) {
+            let { rows } = response.data; 
+            return rows;
+        } else console.log(response);
+    } catch (e) {
+        console.error(e);
+        return { errors: [{ error: 'An error occurred' }] };
+    } 
 }
