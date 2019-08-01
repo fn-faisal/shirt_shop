@@ -3,11 +3,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
-const outputDirectory = 'dist';
+const outputDirectory = '../public/';
 
 module.exports = {
   entry: ['babel-polyfill', './src/index.js'],
   output: {
+    publicPath: '/',
     path: path.join(__dirname, outputDirectory),
     filename: 'bundle.js'
   },
@@ -28,7 +29,7 @@ module.exports = {
       loader: 'url-loader?limit=100000'
     },
     {
-      test: /\.scss$/,
+      test: /\.scss$/, 
       use: [
           "style-loader", // creates style nodes from JS strings
           "css-loader", // translates CSS into CommonJS

@@ -28,7 +28,7 @@ app.use(session({ secret: process.env.CART_SESSION_SECRET || 'turing', cookie: {
 
 
 app.use('/api', apiRouter);
-app.use('/', (req, res) => res.send('Hello server udate') );
+app.use('*', (req, res) => res.sendFile(path.resolve( 'public', 'index.html')) );
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 
