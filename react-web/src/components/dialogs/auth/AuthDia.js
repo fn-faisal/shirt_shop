@@ -2,10 +2,12 @@ import { Component } from "react";
 // the view.
 import view from './AuthDia.jsx';
 
+import { connect } from 'react-redux';
+
 // the dispatchers.
 import dispatch from '../../../redux/auth/auth.dispatch';
 
-export default class AuthDia extends Component {
+class AuthDia extends Component {
     //-------------------------------------------
     // Component state.
     //-------------------------------------------
@@ -24,10 +26,12 @@ export default class AuthDia extends Component {
         }),
         register: () => {
             if (this.validate(['name', 'email', 'password', 'confirm-password']) === false ) return;
+            dispatch.loading();
             dispatch.register( this.state.customer )
         },
         login : () => {
             if (this.validate(['email', 'password']) === false ) return;
+            dispatch.loading();
             dispatch.login( { email: this.state.customer.email, password: this.state.customer.password} );
         },
         hasError: (field) => {
@@ -40,7 +44,7 @@ export default class AuthDia extends Component {
         },
         onFacebookLogin : (response) => {
             // let { accessToken } = response;
-            console.log(response);
+            dispatch.loading();
             dispatch.loginFacebook( response.accessToken );
         }
     }
@@ -89,3 +93,7 @@ export default class AuthDia extends Component {
     //-------------------------------------------
     render = () => view({ ...this.state, ...this.props })
 }
+
+const mapStateToProps = state => state;
+
+export default connect(mapStateToProps)(AuthDia);

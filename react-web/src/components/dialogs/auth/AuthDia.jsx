@@ -11,6 +11,12 @@ const FacebookLogin = ({ onClick }) => (
 export default props => (
     <div>
         <div className="modal fade show" id="auth-dia">
+            { props.auth.loading === true && 
+            <a class="dropdown-item text-center" href="javascript:void(0)">
+                <div class="spinner-border text-light" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </a>}
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-c-tabs">

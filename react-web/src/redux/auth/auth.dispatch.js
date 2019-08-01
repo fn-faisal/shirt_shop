@@ -10,5 +10,6 @@ export default {
     login: ( credentials ) => store.dispatch( initializers.login(credentials) ),
     loginFacebook: ( access_token ) => store.dispatch( initializers.loginFacebook(access_token) ),
     logout: () => store.dispatch( initializers.logout() ),
-    updateUser: ( token, data ) => store.dispatch( initializers.updateUser( token, data ) )
+    updateUser: ( token, data ) => store.dispatch( initializers.updateUser( token, data ) ),
+    loading: () => store.dispatch( initializers.loading() )
 }

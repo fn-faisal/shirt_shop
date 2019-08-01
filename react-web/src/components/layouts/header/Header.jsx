@@ -18,7 +18,8 @@ export default props => (
                 aria-expanded="false"/>
                 <label htmlFor="search" >Search for shirts...</label>
                 <div class="dropdown-menu dropdown-menu-right w-50">
-                    { props.product.searching === true && <a class="dropdown-item text-center" href="javascript:void(0)">
+                    { props.product.searching === true && 
+                    <a class="dropdown-item text-center" href="javascript:void(0)">
                         <div class="spinner-border text-light" role="status">
                             <span class="sr-only">Loading...</span>
                         </div>

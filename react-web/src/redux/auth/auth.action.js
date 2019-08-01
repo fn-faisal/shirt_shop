@@ -9,7 +9,8 @@ export const ACTIONS = {
     LOGIN_FACEBOOK: 'LOGIN_FACEBOOK',
     UPDATE_USER: 'UPDATE_USER',
     LOAD: 'LOAD',
-    LOGOUT: 'LOGOUT'  
+    LOGOUT: 'LOGOUT',
+    LOADING: 'LOADING'  
 } 
 
 export const initializers = {
@@ -39,5 +40,6 @@ export const initializers = {
         console.log(data);
         let payload = await updateUser( token, data );
         return dispatch(createAction( ACTIONS.UPDATE_USER, { profile: payload } ));
-    }
+    },
+    loading: () => createAction( ACTIONS.LOADING, { loading: true } )
 }

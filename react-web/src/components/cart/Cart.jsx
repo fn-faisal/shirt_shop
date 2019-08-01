@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 export default props => (
     <div className="cart dropdown">
         <a href="javascript:void(0)" className="cart-btn mx-4 bg-transparent text-dark dropdown-toggle" 
-        onClick={ () => props.toggleCart() }
-        aria-haspopup="true" aria-expanded="false" >
+            onClick={ () => props.toggleCart() }
+            aria-haspopup="true" aria-expanded="false" >
             <img src="/assets/img/icons-bag.png"/>
             { props.cart.cart.length > 0 &&
             <span className="badge rounded-circle badge-danger position-absolute header-cart-count">{ props.cart.cart.length }</span> }
